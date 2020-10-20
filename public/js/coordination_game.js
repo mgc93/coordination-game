@@ -1058,10 +1058,10 @@ var riskSurvey = {
     ],
     on_finish: function (data) {
         risk_data.push(data);
+        risk_pay = getPayRiskTask(risk_data);
     }
 };
 
-risk_pay = getPayRiskTask(risk_data);
 
 // display instructions risk task
 var ambiguityInstructions = {
@@ -1162,12 +1162,13 @@ var ambiguitySurvey = {
     ],
     on_finish: function (data) {
         ambiguity_data.push(data);
+        ambiguity_pay = getPayAmbiguityTask(ambiguity_data);
     }
 };
 
-ambiguity_pay = getPayAmbiguityTask(ambiguity_data);
 
-var finalEarnings = [];
+
+var finalEarnings = [0, 0];
 function getFinalPay(risk_pay,ambiguity_pay){
     // select randomly part 3 or part 4 payment
     var randIndPay = getRandomInt(1,2);
@@ -1185,7 +1186,7 @@ function getFinalPay(risk_pay,ambiguity_pay){
     return [finalPay, payPart];
 }
 
-finalEarnings = getFinalPay(risk_pay,ambiguity_pay);
+
 
 // var recalibrationInstruction2 = {
 //     type: "html-keyboard-response",
@@ -1269,7 +1270,9 @@ var success_guard = {
     func: () => { successExp = true }
 }
 
-
+if(successExp){
+    finalEarnings = getFinalPay(risk_pay,ambiguity_pay);
+}
 
 // // `<p>You have completed the task. The webcam will be closed when you close our browser.</p>`
 //  var end = {
