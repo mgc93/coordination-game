@@ -696,6 +696,23 @@ var controlQuestionsChoice = {
 };
 
 
+var choiceInstructionReinforce = {
+    type: 'html-keyboard-response',
+    stimulus: `<div><font size=120%; font color = 'green';>Decision-making Task</font><br/>
+                                        <br><br/>
+        Now, we will begin with the choice task. Please keep your head still, otherwise we may have to redo the calibration and validation.<br/>
+        There will be a break halfway through the task. During the break you can move your head if you need to.    <br/>
+                  <br><br/>
+       After each choice, make sure to stare at the red circles that will appear on the screen, until they disappear.  <br/>
+       This is part of ongoing adjustments to the eye-tracking.    <br/>
+       <br><br/>
+       NOTE: If the computer thinks that you are looking somewhere other than directly at the red dot,   <br/>
+       you may need to redo the calibration and validation process, slowing down the study.   <br/>
+                                               <br><br/>
+       When you are ready, press the <b>SPACE BAR</b> to begin. </div>`,
+    choices: ['spacebar'],
+    post_trial_gap: 500
+}
 
 
 
@@ -1150,23 +1167,24 @@ var ambiguitySurvey = {
 };
 
 
-
+var finalEarnings = [];
 function getFinalPay(risk_pay,ambiguity_pay){
     // select randomly part 3 or part 4 payment
     var randIndPay = getRandomInt(1,2);
     var payPart = [];
+    var finalPay = [];
     if(randIndPay===1){
-        var finalPay = risk_pay;
+        finalPay = risk_pay;
         payPart = 3;
-        return [risk_pay,3]
+        return [finalPay,3]
     } else {
-        var finalPay = ambiguity_pay;
+        finalPay = ambiguity_pay;
         payPart = 4;
-        return [ambiguity_pay,4]
+        return [finalPay,4]
     }
 }
 
-var finalEarnings = getFinalPay(risk_pay,ambiguity_pay);
+finalEarnings = getFinalPay(risk_pay,ambiguity_pay);
 
 // var recalibrationInstruction2 = {
 //     type: "html-keyboard-response",
@@ -1323,11 +1341,14 @@ function startExperiment() {
         timeline: [
             start_exp_survey_trial,
             fullscreenEnter,
-            eyeTrackingInstruction1, eyeTrackingInstruction2, inital_eye_calibration,
             experimentOverview,
             choiceInstructions,
             controlQuestionsChoice,
-            recalibration,
+            eyeTrackingInstruction1, 
+            eyeTrackingInstruction2, 
+            inital_eye_calibration,
+            // recalibration,
+            choiceInstructionReinforce,
             choiceOverview,
             game_choice,
             breaktime,
