@@ -1058,10 +1058,10 @@ var riskSurvey = {
     ],
     on_finish: function (data) {
         risk_data.push(data);
-        risk_pay = getPayRiskTask(risk_data);
     }
 };
 
+risk_pay = getPayRiskTask(risk_data);
 
 // display instructions risk task
 var ambiguityInstructions = {
@@ -1162,10 +1162,10 @@ var ambiguitySurvey = {
     ],
     on_finish: function (data) {
         ambiguity_data.push(data);
-        ambiguity_pay = getPayAmbiguityTask(ambiguity_data);
     }
 };
 
+ambiguity_pay = getPayAmbiguityTask(ambiguity_data);
 
 var finalEarnings = [];
 function getFinalPay(risk_pay,ambiguity_pay){
@@ -1176,12 +1176,13 @@ function getFinalPay(risk_pay,ambiguity_pay){
     if(randIndPay===1){
         finalPay = risk_pay;
         payPart = 3;
-        return [finalPay,3]
+        // return [finalPay,3]
     } else {
         finalPay = ambiguity_pay;
         payPart = 4;
-        return [finalPay,4]
+        // return [finalPay,4]
     }
+    return [finalPay, payPart];
 }
 
 finalEarnings = getFinalPay(risk_pay,ambiguity_pay);
@@ -1341,13 +1342,13 @@ function startExperiment() {
         timeline: [
             start_exp_survey_trial,
             fullscreenEnter,
-            experimentOverview,
             choiceInstructions,
             controlQuestionsChoice,
             eyeTrackingInstruction1, 
             eyeTrackingInstruction2, 
             inital_eye_calibration,
             // recalibration,
+            experimentOverview,
             choiceInstructionReinforce,
             choiceOverview,
             game_choice,
