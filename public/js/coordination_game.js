@@ -1168,24 +1168,6 @@ var ambiguitySurvey = {
 
 
 
-var finalEarnings = [0, 0];
-function getFinalPay(risk_pay,ambiguity_pay){
-    // select randomly part 3 or part 4 payment
-    var randIndPay = getRandomInt(1,2);
-    var payPart = [];
-    var finalPay = [];
-    if(randIndPay===1){
-        finalPay = risk_pay;
-        payPart = 3;
-        // return [finalPay,3]
-    } else {
-        finalPay = ambiguity_pay;
-        payPart = 4;
-        // return [finalPay,4]
-    }
-    return [finalPay, payPart];
-}
-
 
 
 // var recalibrationInstruction2 = {
@@ -1264,15 +1246,57 @@ function getFinalPay(risk_pay,ambiguity_pay){
 // }
 
 
+function getFinalPay(risk_pay,ambiguity_pay){
+    // select randomly part 3 or part 4 payment
+    var randIndPay = getRandomInt(1,2);
+    var payPart = [];
+    var finalPay = [];
+    if(randIndPay===1){
+        finalPay = risk_pay;
+        payPart = 3;
+        // return [finalPay,3]
+    } else {
+        finalPay = ambiguity_pay;
+        payPart = 4;
+        // return [finalPay,4]
+    }
+    return [finalPay,payPart];
+}
+
+
+// var finalEarnings = function displayFinalPay(finalPay){
+//     // select randomly part 3 or part 4 payment
+//     var randIndPay = getRandomInt(1,2);
+//     var payPart = [];
+//     var finalPay = [];
+//     if(randIndPay===1){
+//         finalPay = risk_pay;
+//         payPart = 3;
+//         // return [finalPay,3]
+//     } else {
+//         finalPay = ambiguity_pay;
+//         payPart = 4;
+//         // return [finalPay,4]
+//     }
+//     html = ` <div> Part ${payPart} was selected for payment! </br>
+//     Your earnings are ${finalPay} dollars. </br> 
+//     <br></br>
+//     We will send you ${finalPay} dollars for Part ${payPart} soon! </br> 
+//     We will send you the bonus payments for Part 1 or Part 2 within the next 2 weeks. </br>
+//     </div>`;
+//     return html
+// }
+
+var finalPay = [0, 0];
 var successExp = false;
 var success_guard = {
     type: 'call-function',
-    func: () => { successExp = true }
+    func: () => { 
+        successExp = true; 
+        finalPay = getFinalPay(risk_pay,ambiguity_pay);
+    }
 }
 
-if(successExp){
-    finalEarnings = getFinalPay(risk_pay,ambiguity_pay);
-}
 
 // // `<p>You have completed the task. The webcam will be closed when you close our browser.</p>`
 //  var end = {
@@ -1310,8 +1334,8 @@ var on_finish_callback = function () {
         subject: subject_id,
         subject: subject_id,
         interaction: jsPsych.data.getInteractionData().json(),
-        payment: finalEarnings[0],
-        payment_part: finalEarnings[1],
+        payment: finalPay[0],
+        payment_part: finalPay[1],
         windowWidth: screen.width,
         windowHight: screen.height
     });
@@ -1345,21 +1369,21 @@ function startExperiment() {
         timeline: [
             start_exp_survey_trial,
             fullscreenEnter,
-            choiceInstructions,
-            controlQuestionsChoice,
-            eyeTrackingInstruction1, 
-            eyeTrackingInstruction2, 
-            inital_eye_calibration,
-            // recalibration,
-            experimentOverview,
-            choiceInstructionReinforce,
-            choiceOverview,
-            game_choice,
-            breaktime,
-            beliefInstructions,
-            controlQuestionsBelief,
-            beliefOverview,
-            game_belief,
+            // choiceInstructions,
+            // controlQuestionsChoice,
+            // eyeTrackingInstruction1, 
+            // eyeTrackingInstruction2, 
+            // inital_eye_calibration,
+            // // recalibration,
+            // experimentOverview,
+            // choiceInstructionReinforce,
+            // choiceOverview,
+            // game_choice,
+            // breaktime,
+            // beliefInstructions,
+            // controlQuestionsBelief,
+            // beliefOverview,
+            // game_belief,
             riskInstructions,
             riskOverview,
             riskSurvey,
@@ -1375,12 +1399,13 @@ function startExperiment() {
                 document.body.style.cursor = 'pointer'
                 jsPsych.endExperiment(`<div>
                 Thank you for your participation! You can close the browser to end the experiment now. </br>
+                Part ${finalPay[1]} was selected for payment! </br>
+                Your earnings are ${finalPay[0]} dollars. </br> 
+                <br></br>
+                We will send you ${finalPay[0]} dollars for Part ${finalPay[1]} soon! </br> 
+                We will send you the bonus payments for Part 1 or Part 2 within the next 2 weeks. </br>
                 The webcam will turn off when you close the browser. </br>
                 Your survey code is: ${makeSurveyCode('success')}. </br>
-                You are going to be paid for Part ${finalEarnings[1]}. </br> 
-                Your earnings are ${finalEarnings[0]} dollars. </br> 
-                We will send you ${finalEarnings[0]} dollars for Part ${finalEarnings[1]} soon! </br> 
-                We will send you the bonus payments for Part 1 or Part 2 within the next 2 weeks. </br>
                 </div>`);
             }
             if (trialcounter == 30) { 
