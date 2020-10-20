@@ -885,7 +885,7 @@ var game_belief = {
             }
         }      
     ],
-    loop_function: () => belief_count < 10, // change this to length of array: 105 
+    loop_function: () => belief_count < 3, // change this to length of array: 105 
 };
 
 
