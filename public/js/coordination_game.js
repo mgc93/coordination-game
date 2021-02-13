@@ -9,6 +9,7 @@
 // correct number of validation/calibration dots
 // copy paste to the main task
 // simplify instructions
+// check if commits are made with the right account
 
 // generate payoffs
 var rVec = [0.55, 0.6, 0.7, 0.8, 0.9, 0.95];
