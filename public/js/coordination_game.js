@@ -3,16 +3,23 @@
 // test version
 
 // couldn't make nice border as feedback after choice :(
-// add validation only every 30 trials
-// change loop through trials for 90
+// check if enough data displayed in the plugin
 // decide on final payment based on average duration from pilot
 // change game payoffs if needed and belief task payoffs (and instructions payoffs and control questions payoffs)
 // correct number of validation/calibration dots
-
+// copy paste to the main task
+// simplify instructions
 
 // generate payoffs
-generateDesign = function(min_payoff){
-    var xVec = [1.5, 2, 3, 4, 5, 6, 7, 8, 9];
+var rVec = [0.55, 0.6, 0.7, 0.8, 0.9, 0.95];
+var min_payoff = 5;
+generateDesign = function(min_payoff,rVec){
+    // determine multiplier based on risk levels
+    var xVec = [];
+    for(var i = 0; i < rVec.length; i++){
+        var m = rVec[i]/(1-rVec[i]);
+        xVec.push(m);
+    }
     var cVec = min_payoff;
     var dVec = Array(5).fill().map((element, index) => index + cVec);
     var bVec = Array(5).fill().map((element, index) => index + cVec);
@@ -23,9 +30,9 @@ generateDesign = function(min_payoff){
     var D = [];
     var E = [];
     var R = [];
-    for(var x = 0; x <= xVec.length; x++){
+    for(var x = 0; x < xVec.length; x++){
         for(var d = 0; d < dVec.length; d++){
-            for(var b = 0; b< bVec.length; b++){
+            for(var b = 0; b < bVec.length; b++){
                 if(bVec[b]>=dVec[d] & dVec[d]>cVec & xVec[x]>1){
                     aVec = (dVec[d]-cVec)/xVec[x] + bVec[b];
                     r = (dVec[d]-cVec)/(dVec[d]-cVec+aVec-bVec[b]);
@@ -44,7 +51,7 @@ generateDesign = function(min_payoff){
     var design = [A,A,C,B,B,C,D,D];
     return  [design,R,E];
 }
-var design = generateDesign(5);
+var design = generateDesign(min_payoff,rVec);
 var payoff = design[0];
 var r = design[1];
 var eu = design[2];
@@ -80,6 +87,11 @@ downloadCSV = function (csv, filename) {
     document.body.appendChild(downloadLink);
     downloadLink.click();
 };
+
+var payFailQuiz1 = '75c';
+var payFailQuiz2 = '300c';
+var payFailCalibration1 = '50c';
+var payFailCalibration2 = '200c';
 
 /**************/
 /** Constants */
@@ -137,8 +149,6 @@ function uploadSubjectStatus(status) {
 }
 
 
-//preassign a probability string
-
 /***********************/
 /******** Trials *******/
 /***********************/
@@ -149,7 +159,7 @@ var start_exp_survey_trial = {
     questions: [
         { prompt: "What's your worker ID?", rows: 2, columns: 50, required: true },
         { prompt: "What's your age?", rows: 1, columns: 50, required: true },
-        { prompt: "What's your gender? (Female/Male/Other/Prefer not to say)", rows: 1, columns: 50, require: true },
+        { prompt: "What's your gender?", rows: 1, columns: 50, require: true },
     ],
     preamble: `<div>Thanks for choosing our experiment! Please answer the following questions to begin today's study. </div>`,
 };
@@ -232,7 +242,7 @@ var eyeTrackingNote = {
             If you are back on this page, it means the calibration and validation did not work as well as we would like.  <br/>
             Please read the tips above again, make any adjustments, and try again.  <br/>
             There are only <b>THREE</b> chances to get this right.  <br/>
-            Otherwise, the study cannot proceed and you will only receive 50 cents for participating.  </font><br/>
+            Otherwise, the study cannot proceed and you will only receive a small amount for participating.  </font><br/>
             <br><br/>
              <font size=5px; >When you are ready, press the <b>SPACE BAR</b> to bring up the video feed and make these adjustments. </font></div>`,
     post_trial_gap: 500,
@@ -241,8 +251,8 @@ var eyeTrackingNote = {
 }
 
 
-//eye tracking parameters
-var calibrationMax = 3;
+//initial eye tracking parameters
+var calibrationMax = 1;
 var calibrationAttempt = 0;
 var success = false; //update if there's a success
 var eye_calibration_state = {
@@ -255,8 +265,8 @@ var init_flag = function () {
     } else return false;
 };
 
-var validationTols = [130, 165, 200];
-var validationAccuracys = [0.8, 0.7, 0.6];
+var validationTols = [200];
+var validationAccuracys = [0.6];
 
 /** first we need a calibration and validation step before entering into the main choice task */
 var inital_eye_calibration = {
@@ -284,7 +294,7 @@ var inital_eye_calibration = {
                     if (!success && calibrationAttempt == calibrationMax) {
                         survey_code = makeSurveyCode('failed');
                         closeFullscreen();
-                        jsPsych.endExperiment(`Sorry, unfortunately the webcam calibration has failed.  We can't proceed with the study.  </br> You will receive 50 cents for making it this far. Your survey code is: ${survey_code}. Thank you for signing up!`);
+                        jsPsych.endExperiment(`Sorry, unfortunately the webcam calibration has failed.  We can't proceed with the study.  </br> You will receive ${payFailCalibration1} for making it this far. Your survey code is: ${survey_code}${payFailCalibration1}. Thank you for signing up!`);
                     }
                 }
             }
@@ -292,6 +302,7 @@ var inital_eye_calibration = {
     ],
     loop_function: () => (calibrationAttempt < calibrationMax) && (!success),
 };
+
 
 var experimentOverview = {
     type: 'html-keyboard-response',
@@ -311,7 +322,6 @@ var experimentOverview = {
 
 
 
-// recalibration
 var recalibrationInstruction = {
     type: "html-keyboard-response",
     on_start: function () {
@@ -319,28 +329,50 @@ var recalibrationInstruction = {
             document.body.style.cursor = 'none'
     },
     stimulus: `<div>We need to redo the calibration and validation before you begin with the choice task. </br>
-    As before, make sure you look at each dot until it disappears and make sure you don’t move your head.</br>
-    <br></br>
-    Please press <b>SPACE BAR</b> when you are ready to begin.</div>`,
+   As before, make sure you stare at each dot until it disappears and make sure you don’t move your head.</br>
+   <br></br>
+   Please press <b>SPACE BAR</b> when you are ready to begin.</div>`,
     choices: ['spacebar'],
-    post_trial_gap: 500,
+    post_trial_gap: 500
 };
+
+var recalibrationMax = 3;
+var recalibrationAttempt = 0;
+var resuccess = false; //update if there's a success
 
 var recalibration = {
     timeline: [
         recalibrationInstruction,
         {
             type: "eye-tracking",
+            doInit: () => init_flag(),
+            IsInterTrial: true,
             doCalibration: true,
             calibrationDots: realCaliDot, // change to 12
             calibrationDuration: 3,
             doValidation: true,
             validationDots: realCaliDot,// change to 12
             validationDuration: 2,
-            validationTol: 200
+            validationTol: validationTols[recalibrationAttempt],
+            on_finish: function (data) {
+                console.log(JSON.parse(data.validationPoints)[0].hitRatio == null);
+                if (JSON.parse(data.validationPoints)[0].hitRatio == null) {
+                    jsPsych.endExperiment('The study has ended. You may have exited full screen mode, or your browser may not be compatible with our study.');
+                } else {
+                    recalibrationAttempt++;
+                    if (data.accuracy >= validationAccuracys[recalibrationAttempt - 1]) resuccess = true;
+                    if (!resuccess && recalibrationAttempt == recalibrationMax) {
+                        survey_code = makeSurveyCode('failed');
+                        closeFullscreen();
+                        jsPsych.endExperiment(`Sorry, unfortunately the webcam calibration has failed.  We can't proceed with the study.  </br> You will receive ${payFailCalibration2} for making it this far. Your survey code is: ${survey_code}${payFailCalibration2}. Thank you for signing up!`);
+                    }
+                }
+            }
         }
     ],
+    loop_function: () => (recalibrationAttempt < recalibrationMax) && (!resuccess),
 };
+
 
 
 
@@ -463,17 +495,19 @@ var if_node2 = {
 }
 
 
-// reshape the list of payoffs to 8 columns of payoffs
-function getGameMatrices(payoff){
-    var reshapedPayoff = [];
-    var nGames = payoff.length/8;
-    while(payoff.length){
-        reshapedPayoff.push(payoff.splice(0,nGames))
-    }
-    return reshapedPayoff;
-}
+// // reshape the list of payoffs to 8 columns of payoffs
+// function getGameMatrices(payoff){
+//     var reshapedPayoff = [];
+//     var nGames = payoff.length/8;
+//     while(payoff.length){
+//         reshapedPayoff.push(payoff.splice(0,nGames))
+//     }
+//     return reshapedPayoff;
+// }
+// var GameMatrices = getGameMatrices(payoff);
 
-var GameMatrices = getGameMatrices(payoff);
+// no need to reshape the payoff anymore
+var GameMatrices = payoff;
 
 function listToMatrix(list, elementsPerSubArray) {
     var matrix = [], i, k;
@@ -712,7 +746,7 @@ var controlQuestionsChoice = {
         <br><br/>
         <div>The following questionnaire is meant to test your understanding of the instructions.</div>
         <br><br/>
-        <div>If you answer less than 4 of the 6 questions correct, you will not be able to participate in the study and will receive a payment of $0.50.</div>
+        <div>If you answer less than 4 of the 6 questions correct, you will not be able to participate in the study and will receive a payment of ${payFailQuiz1}.</div>
         <br><br/>
         <div>Consider the following table.</div>
     </div>
@@ -726,7 +760,7 @@ var controlQuestionsChoice = {
         if(nCorrectChoice<4){
             survey_code = makeSurveyCode('failed');
             closeFullscreen();
-            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> You will receive 50 cents for making it this far. Your survey code is: ${survey_code}. Thank you for signing up!`);
+            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> You will receive ${payFailQuiz1} for making it this far. Your survey code is: ${survey_code}${payFailQuiz1}. Thank you for signing up!`);
         }
     }
 };
@@ -779,10 +813,10 @@ var game_choice = {
             type: "binary-choice-game",
             stimulus: () => getGameMatrixTrial(choice_count, GameMatricesShuffledChoice,randDisplayOrderChoice), // list of 8 payoffs
             choices: ["uparrow", "downarrow"],
-            stimulus_order: randIndChoice[choice_count],
-            stimulus_display: randDisplayOrderChoice[choice_count],
-            stimulus_r: rShuffledChoice[choice_count],
-            stimulus_eu: euShuffledChoice[choice_count],
+            stimulus_order: () => randIndChoice[choice_count],
+            stimulus_display: () => randDisplayOrderChoice[choice_count],
+            stimulus_r: () => rShuffledChoice[choice_count],
+            stimulus_eu: () => euShuffledChoice[choice_count],
             realOrPrac: false,
             // stimulus_duration: 3000,
             on_finish: function (data) {
@@ -791,7 +825,7 @@ var game_choice = {
             }
         }      
     ],
-    loop_function: () => choice_count < 10, // change this to 90 after uploading
+    loop_function: () => choice_count < 10, // change this to 60 after uploading
 };
 
 // break
@@ -802,8 +836,9 @@ var breaktime = {
                 When you are ready to continue the study, press the <b>SPACE BAR</b>.</div>`,
     choices: ['spacebar'],
     on_start: function () {
-        webgazer.pause(),
-            webgazer.clearData()
+        webgazer.end(),
+        // webgazer.pause(),
+        webgazer.clearData()
     },
     post_trial_gap: 500,
 };
@@ -846,7 +881,7 @@ var controlQuestionsBelief = {
         <br><br/>
         <div>The following questionnaire is meant to test your understanding of the instructions.</div>
         <br><br/>
-        <div>If you answer less than 2 of the 3 questions correct, you will not be able to participate in the study and will receive a payment of $3.</div>
+        <div>If you answer less than 2 of the 3 questions correct, you will not be able to participate in the study and will receive a payment of ${payFailQuiz2}.</div>
         <br><br/>
         <div>Consider the following table.</div>
     </div>
@@ -870,7 +905,7 @@ var controlQuestionsBelief = {
         if(nCorrectBelief<2){
             survey_code = makeSurveyCode('failed');
             closeFullscreen();
-            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> You will receive  3 dollars for making it this far. Your survey code is: ${survey_code}. Thank you for signing up!`);
+            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> You will receive  ${payFailQuiz2} for making it this far. Your survey code is: ${survey_code}${payFailQuiz2}. Thank you for signing up!`);
         }
     }
 };
@@ -905,10 +940,10 @@ var game_belief = {
             type: "table-slider-response",
             stimulus: () => getGameMatrixTrial(belief_count, GameMatricesShuffledBelief,randDisplayOrderBelief), // list of 8 payoffs
             labels: ['0%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%','100%'],
-            stimulus_order: randIndBelief[belief_count],
-            stimulus_display: randDisplayOrderBelief[belief_count],
-            stimulus_r: randIndBelief[belief_count],
-            stimulus_eu: randIndBelief[belief_count],
+            stimulus_order: () => randIndBelief[belief_count],
+            stimulus_display: () => randDisplayOrderBelief[belief_count],
+            stimulus_r: () => randIndBelief[belief_count],
+            stimulus_eu: () => randIndBelief[belief_count],
             min: 0,
             max: 100,
             prompt: 'What percentage of participants choose action L ?',
@@ -1405,12 +1440,12 @@ function startExperiment() {
         timeline: [
             start_exp_survey_trial,
             fullscreenEnter,
-            choiceInstructions,
-            controlQuestionsChoice,
             eyeTrackingInstruction1, 
             eyeTrackingInstruction2, 
             inital_eye_calibration,
-            // recalibration,
+            choiceInstructions,
+            controlQuestionsChoice,
+            recalibration,
             experimentOverview,
             choiceInstructionReinforce,
             choiceOverview,
@@ -1441,7 +1476,7 @@ function startExperiment() {
                 We will send you ${finalPay[0]} dollars for Part ${finalPay[1]} soon! </br> 
                 We will send you the bonus payments for Part 1 or Part 2 within the next 2 weeks. </br>
                 The webcam will turn off when you close the browser. </br>
-                Your survey code is: ${makeSurveyCode('success')}. </br>
+                Your survey code is: ${makeSurveyCode('success')}${finalPay[0]*100}. </br>
                 </div>`);
             }
             if (trialcounter == 30) { 

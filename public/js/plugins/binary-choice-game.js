@@ -246,7 +246,6 @@ jsPsych.plugins["binary-choice-game"] = (function () {
         "display_order": trial.stimulus_display,
         "game_r": trial.stimulus_r,
         "game_eu": trial.stimulus_eu,
-        "probability":trial.Probabilty,
         "rt": response.rt,
         "key_press": response.key,
         "choices": trial.choices,
@@ -288,15 +287,6 @@ jsPsych.plugins["binary-choice-game"] = (function () {
     }
 
     
-
-
-
-
-
-
-
-
- 
   };
 
   return plugin;
