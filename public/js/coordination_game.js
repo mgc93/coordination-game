@@ -1005,6 +1005,32 @@ function getPayRiskTask(risk_data){
     return amountPay;
 }
 
+// function getRiskTaskChoices(risk_data){
+//     // concatenae all options into one array
+//     // var responselength = risk_data[0].responses.length;
+//     var responses = risk_data[0].responses;
+//     // var answers = [];
+//     var options = question_risk_1_options.concat(question_risk_2_options,
+//                                                 question_risk_3_options,
+//                                                 question_risk_4_options,
+//                                                 question_risk_5_options,
+//                                                 question_risk_6_options,
+//                                                 question_risk_7_options,
+//                                                 question_risk_8_options,
+//                                                 question_risk_9_options,
+//                                                 question_risk_10_options);      
+//     // select random choice to be paid
+//     var c = getRandomInt(1,10);
+//     var choiceOptions = [options[(c-1) + c], options[c + c]];
+//     var answersChoice = [];
+//     for(var i = 0; i < 2; i++){
+//         if(responses.includes(choiceOptions[i])){
+//             answersChoice.push(i+1);
+//         }
+//     }
+//     return answersChoice;
+// }
+
 // get risk task payments
 function getPayAmbiguityTask(ambiguity_data){
     // concatenate all options into one array
@@ -1059,6 +1085,43 @@ function getPayAmbiguityTask(ambiguity_data){
     }
     return amountPay;
 }
+
+// function getAmbiguityTaskChoices(ambiguity_data){
+//     // concatenate all options into one array
+//     // var responselength = risk_data[0].responses.length;
+//     var responses = ambiguity_data[0].responses;
+//     var options = question_ambiguity_1_options.concat(question_ambiguity_2_options,
+//         question_ambiguity_3_options,
+//         question_ambiguity_4_options,
+//         question_ambiguity_5_options,
+//         question_ambiguity_6_options,
+//         question_ambiguity_7_options,
+//         question_ambiguity_8_options,
+//         question_ambiguity_9_options,
+//         question_ambiguity_10_options,
+//         question_ambiguity_11_options,
+//         question_ambiguity_12_options,
+//         question_ambiguity_13_options,
+//         question_ambiguity_14_options,
+//         question_ambiguity_15_options,
+//         question_ambiguity_16_options,
+//         question_ambiguity_17_options,
+//         question_ambiguity_18_options,
+//         question_ambiguity_19_options,
+//         question_ambiguity_20_options);    
+//     // possible amounts option B
+//     var posAmountB = [1.64,1.72,1.80,1.88,1.96,2.04,2.12,2.20,2.28,2.36,2.44,2.52,2.60,2.68,2.76,2.84,2.94,3.00,3.08,3.16];  
+//     // select random choice to be paid
+//     var c = getRandomInt(1,20);
+//     var choiceOptions = [options[(c-1) + c], options[c + c]];
+//     var answersChoice = [];
+//     for(var i = 0; i < 2; i++){
+//         if(responses.includes(choiceOptions[i])){
+//             answersChoice.push(i+1); // option A or option B
+//         }
+//     }
+//     return answersChoice;
+// }
 
 // display instructions risk task
 var riskInstructions = {
