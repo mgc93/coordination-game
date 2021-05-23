@@ -6,15 +6,16 @@
 // check if enough data displayed in the plugin
 // decide on final payment based on average duration from pilot
 // change game payoffs if needed and belief task payoffs (and instructions payoffs and control questions payoffs)
-// copy paste to the main task
+// change trial number
+// correct choice quiz answer
 // (done) simplify instructions - attach new instructions
-// check if commits are made with the right account
+// (done) check if commits are made with the right account
 // (done) change the color of the table for the belief task
 // (done) get rid of eyetracking code
 // (done) add venmo payment question
 // (done) stop camera from turnion on at the beginning
 // arange one of each type of risk level game in the beginning?
-// include better payment variables
+// (done) include better payment variables
 
 // generate payoffs
 var rVec = [0.55, 0.6, 0.7, 0.8, 0.9, 0.95];
@@ -453,7 +454,7 @@ var choiceInstructions = {
 var question_choice_1_options = ["10",
                         "9",
                         "8",
-                        "45"];
+                        "5"];
 var question_choice_2_options = ["10",
                         "9",
                         "8",
@@ -552,7 +553,7 @@ var game_choice = {
             }
         }      
     ],
-    loop_function: () => choice_count < 10, // change this to 60 after uploading
+    loop_function: () => choice_count < r.length, // change this to 60 after uploading
 };
 
 /// break
@@ -681,7 +682,7 @@ var game_belief = {
             }
         }      
     ],
-    loop_function: () => belief_count < 3, // change this to length of array: 105 
+    loop_function: () => belief_count < r.length, // change this to length of array: 105 
 };
 
 
