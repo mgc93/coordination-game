@@ -152,7 +152,7 @@
 <script src="js/lib/jspsych.js"></script>
 <script src="js/lib/js-combinatrorics-0.5.5.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/js-combinatorics/1.4.5/combinatorics.js"></script> -->
-<script src="js/lib/webgazer.js"></script>
+<!-- <script src="js/lib/webgazer.js"></script> -->
 <script src="js/lib/jcanvas.min.js"></script>
 <script src="js/utilsHelper.js"></script>
 <!-- call the plugins -->
@@ -162,11 +162,11 @@
 <script src="js/plugins/jspsych-survey-text.js"></script>
 <script src="js/plugins/jspsych-survey-multi-choice.js"></script>
 <script src="js/plugins/jspsych-call-function.js"></script>
-<script src="js/plugins/decoy-gamble.js"></script>
+<!-- <script src="js/plugins/decoy-gamble.js"></script> -->
 <!-- <script src="js/plugins/binary-choice.js"></script> -->
 <script src="js/plugins/binary-choice-game.js"></script>
 <script src="js/plugins/jspsych-fullscreen.js"></script>
-<script src="js/plugins/eye-tracking.js"></script>
+<!-- <script src="js/plugins/eye-tracking.js"></script> -->
 <script src="js/plugins/table-slider-response.js"></script>
 <script src="js/plugins/jspsych-instructions.js"></script>
 <!-- call your experiement script -->
@@ -184,23 +184,24 @@
         showAlert();
     }).on('click', '.checkmark', function (event) {
         goExp.addEventListener('click', () => {
-            ensureWebcam(() => startExperiment());
+            startExperiment();
+            // ensureWebcam(() => startExperiment());
         });
         event.stopPropagation();
     });
 
-    function ensureWebcam(callback) {
-        $('body').html('<p class="center", style="font-family:Arial, Helvetica, sans-serif">Checking webcam ...</p>');
-        window.navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-            stream.getTracks().forEach(track => track.stop());
-            callback();
-        })
-        .catch(function() {
-            alert('Cannot open webcam.\nIs it blocked? This app requires webcam.');
-            location.reload();
-        });
-    }
+    // function ensureWebcam(callback) {
+    //     $('body').html('<p class="center", style="font-family:Arial, Helvetica, sans-serif">Checking webcam ...</p>');
+    //     window.navigator.mediaDevices.getUserMedia({ video: true })
+    //     .then(function(stream) {
+    //         stream.getTracks().forEach(track => track.stop());
+    //         callback();
+    //     })
+    //     .catch(function() {
+    //         alert('Cannot open webcam.\nIs it blocked? This app requires webcam.');
+    //         location.reload();
+    //     });
+    // }
 
 
 </script>

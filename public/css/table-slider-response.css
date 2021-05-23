@@ -103,6 +103,9 @@
       height: 1vh;
       border-width:2px;
     }
+    .tb .tb-baqh-other #action-other-left {
+      color: #0080ff;
+    }
     /* .tg .tg-baqh-self  {
       text-align:center;
       vertical-align:center;
