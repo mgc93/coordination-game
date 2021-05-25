@@ -6,8 +6,8 @@
 // check if enough data displayed in the plugin
 // decide on final payment based on average duration from pilot
 // change game payoffs if needed and belief task payoffs (and instructions payoffs and control questions payoffs)
-// change trial number
-// correct choice quiz answer
+// (done) change trial number
+// (done) correct choice quiz answer
 // (done) simplify instructions - attach new instructions
 // (done) check if commits are made with the right account
 // (done) change the color of the table for the belief task
@@ -553,7 +553,7 @@ var game_choice = {
             }
         }      
     ],
-    loop_function: () => choice_count < r.length, // change this to 60 after uploading
+    loop_function: () => choice_count < 15// r.length, // change this to 60 after uploading
 };
 
 /// break
@@ -682,7 +682,7 @@ var game_belief = {
             }
         }      
     ],
-    loop_function: () => belief_count < r.length, // change this to length of array: 105 
+    loop_function: () => belief_count < 15 // r.length, // change this to length of array: 105 
 };
 
 
