@@ -559,7 +559,7 @@ var game_choice = {
 /// break
 var breaktime = {
     type: "html-keyboard-response",
-    stimulus: `<div>You are about halfway done! Now you can take a short break if you want. You can move your head from now on.</br>
+    stimulus: `<div>You are about halfway done! Now you can take a short break if you want.</br>
                 <br></br>
                 When you are ready to continue the study, press the <b>SPACE BAR</b>.</div>`,
     choices: ['spacebar'],
