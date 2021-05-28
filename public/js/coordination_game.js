@@ -487,11 +487,7 @@ var controlQuestionsChoice = {
     ],
     preamble: `<div> 
         <br><br/>
-        Thanks for choosing our experiment! Please answer the following questions to begin today's study.</div>
-        <br><br/>
-        <div>The following questionnaire is meant to test your understanding of the instructions.</div>
-        <br><br/>
-        <div>If you answer less than 4 of the 6 questions correct, you will not be able to participate in the study and will receive a payment of ${payFailQuiz1}.</div>
+        Please answer the following questions to begin today's study. Scroll down to see all questions.</div>
         <br><br/>
         <div>Consider the following table.</div>
     </div>
@@ -602,12 +598,7 @@ var controlQuestionsBelief = {
     ],
     preamble: `<div> 
         <br><br/>
-        Please answer the following questions to begin today's study.</div>
-        <br><br/>
-        <div>The following questionnaire is meant to test your understanding of the instructions.</div>
-        <br><br/>
-        <div>If you answer less than 2 of the 3 questions correct, you will not be able to participate in the study and will receive a payment of ${payFailQuiz2}.</div>
-        <br><br/>
+        Please answer the following questions to begin today's study. Scroll down to see all questions.</div>
         <div>Consider the following table.</div>
     </div>
     <br><br/>
@@ -864,9 +855,7 @@ var riskOverview = {
     type: 'html-keyboard-response',
     stimulus: `<div><font size=120%; font color = 'green';>Part 3 Task </font><br/>
             <br><br/>
-            In this experiment you will be presented with a series of lottery choices. </br>
-            <br><br/>
-            Your job is to indicate which option you would prefer for each of the ten paired lottery choices.</div>
+            Please indicate which option you would prefer for each of the ten paired gambles.</div>
             <br><br/>
             At the end of the experiment, one of your choice will be randomly selected and the your payment will be determined. </br>
             <br><br/>
@@ -938,9 +927,7 @@ var ambiguityOverview = {
     type: 'html-keyboard-response',
     stimulus: `<div><font size=120%; font color = 'green';>Part 4 Task </font><br/>
             <br><br/>
-            In this experiment you will be presented with a series of lottery choices. </br>
-            <br><br/>
-            Your job is to indicate which option you would prefer for each of the ten paired lottery choices.</div>
+            Please indicate which option you would prefer for each of the ten paired gambles.</div>
             <br><br/>
             At the end of the experiment, one of your choice will be randomly selected and the your payment will be determined. </br>
             <br><br/>
