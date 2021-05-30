@@ -390,7 +390,7 @@ function getGameMatrixTrial(choice_count, reshapedPayoff, randDisplayOrder){
 function getAnswersChoiceQuiz(choice_quiz_data){
     var nCorrect = 0;
     var responses = choice_quiz_data[0].responses.slice(1,choice_quiz_data[0].responses.length-1).split(',');
-    var correctAnswers = ["9","8","7","5","TRUE","TRUE"];
+    var correctAnswers = ["9","8","7","5","TRUE","FALSE"];
     for(var i = 0; i < responses.length; i++){
         if(responses[i].includes(correctAnswers[i])){
             nCorrect = nCorrect + 1;
@@ -549,7 +549,7 @@ var game_choice = {
             }
         }      
     ],
-    loop_function: () => choice_count < 15// r.length, // change this to 60 after uploading
+    loop_function: () => choice_count < r.length, // change this to 60 after uploading
 };
 
 /// break
@@ -673,7 +673,7 @@ var game_belief = {
             }
         }      
     ],
-    loop_function: () => belief_count < 15 // r.length, // change this to length of array: 105 
+    loop_function: () => belief_count < r.length, // change this to length of array: 105 
 };
 
 
