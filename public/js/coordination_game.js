@@ -390,7 +390,7 @@ function getGameMatrixTrial(choice_count, reshapedPayoff, randDisplayOrder){
 function getAnswersChoiceQuiz(choice_quiz_data){
     var nCorrect = 0;
     var responses = choice_quiz_data[0].responses.slice(1,choice_quiz_data[0].responses.length-1).split(',');
-    var correctAnswers = ["10","10","9","5","TRUE","TRUE"];
+    var correctAnswers = ["9","8","7","5","TRUE","TRUE"];
     for(var i = 0; i < responses.length; i++){
         if(responses[i].includes(correctAnswers[i])){
             nCorrect = nCorrect + 1;
@@ -451,22 +451,22 @@ var choiceInstructions = {
 }
 
 // quiz about the choice task
-var question_choice_1_options = ["10",
-                        "9",
+var question_choice_1_options = ["5",
+                        "7",
                         "8",
-                        "5"];
-var question_choice_2_options = ["10",
-                        "9",
+                        "9"];
+var question_choice_2_options = ["6",
+                        "7",
                         "8",
-                        "5"];
-var question_choice_3_options = ["10",
-                        "9",
-                        "8",
-                        "5"];
-var question_choice_4_options = ["10",
-                        "9",
-                        "8",
-                        "5"];
+                        "9"];
+var question_choice_3_options = ["5",
+                        "6",
+                        "7",
+                        "8"];
+var question_choice_4_options = ["5",
+                        "6",
+                        "7",
+                        "8"];
 var question_choice_5_options = ["TRUE",
                         "FALSE"];
 var question_choice_6_options = ["TRUE",
