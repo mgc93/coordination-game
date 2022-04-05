@@ -763,7 +763,7 @@ var controlQuestionChoice4Response = {
             <br><br/>
             The correct answer is: <font color = 'green';> 5 </font>.
             <br><br/>
-            If the COLUMN CHOOSER selects the column L and you select the row B, then you end up in the UPPER-LEFT cell of the table.
+            If the COLUMN CHOOSER selects the column L and you select the row B, then you end up in the LOWER-LEFT cell of the table.
             <br><br/>
             Your payoff is represented in GREEN.<br>
             The COLUMN CHOOSER'S payoff is represented in RED. <br>
@@ -1759,8 +1759,6 @@ var on_finish_callback = function () {
         browser_type: bowser.version,
         subject: subject_id,
         interaction: jsPsych.data.getInteractionData().json(),
-        pass_quiz_1: passedQuiz1,
-        pass_quiz_2: passedQuiz2,
         windowWidth: screen.width,
         windowHight: screen.height
     });
