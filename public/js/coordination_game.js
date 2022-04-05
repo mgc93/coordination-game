@@ -182,8 +182,7 @@ var paymentInfo = {
 };
 
 var payment_options = ["Venmo",
-                        "Paypal",
-                        "Zelle"];
+                        "Paypal"];
 
 var payment_data = [];
                         
@@ -201,7 +200,7 @@ var personalInfoQuestion = {
     type: 'survey-text',
     questions: [
         { prompt: "What is your name?", rows: 1, columns: 50, required: true },
-        { prompt: "What is the account name or email address associated with your Venmo/Paypal/Zelle account? ", rows: 1, columns: 50, required: true },
+        { prompt: "What is the account name or email address associated with your Venmo/Paypal account? ", rows: 1, columns: 50, required: true },
     ],
     preamble: `<div>Please answer the following questions. </div>`,
 };
