@@ -4,82 +4,100 @@
 
 // couldn't make nice border as feedback after choice :(
 // check if enough data displayed in the plugin
-// decide on final payment based on average duration from pilot
-// change game payoffs if needed and belief task payoffs (and instructions payoffs and control questions payoffs)
-// (done) change trial number
-// (done) correct choice quiz answer
-// (done) simplify instructions - attach new instructions
-// (done) check if commits are made with the right account
-// (done) change the color of the table for the belief task
-// (done) get rid of eyetracking code
-// (done) add venmo payment question
-// (done) stop camera from turnion on at the beginning
-// arange one of each type of risk level game in the beginning?
-// (done) include better payment variables
+// (done) exclude risk and ambiguity task
+// (done) change payment - only choices or belief task paid
+// (done) change index consent form
+// (done) make sure survey code is generated
+// test 
+// preprocess code
+// check preprocessed csv file
+// (done) change instructions
+// (done) add feedback for each control question
 
-// generate payoffs
-var rVec = [0.55, 0.6, 0.7, 0.8, 0.9, 0.95];
-var min_payoff = 5;
-generateDesign = function(min_payoff,rVec){
-    // determine multiplier based on risk levels
-    var xVec = [];
-    for(var i = 0; i < rVec.length; i++){
-        var m = rVec[i]/(1-rVec[i]);
-        xVec.push(m);
-    }
-    var cVec = min_payoff;
-    var dVec = Array(5).fill().map((element, index) => index + cVec);
-    var bVec = Array(5).fill().map((element, index) => index + cVec);
-    var aVec = [];
-    var A = [];
-    var B = [];
-    var C = [];
-    var D = [];
-    var E = [];
-    var R = [];
-    for(var x = 0; x < xVec.length; x++){
-        for(var d = 0; d < dVec.length; d++){
-            for(var b = 0; b < bVec.length; b++){
-                if(bVec[b]>=dVec[d] & dVec[d]>cVec & xVec[x]>1){
-                    aVec = (dVec[d]-cVec)/xVec[x] + bVec[b];
-                    r = (dVec[d]-cVec)/(dVec[d]-cVec+aVec-bVec[b]);
-                    eu = r*aVec + (1-r)*cVec;
-                    A.push(aVec);
-                    B.push(bVec[b]);
-                    C.push(cVec);
-                    D.push(dVec[d]);
-                    R.push(r);
-                    E.push(eu);
-                    aVec = [];
-                }
-            }
-        }
-    }
-    var design = [A,A,C,B,B,C,D,D];
-    return  [design,R,E];
-}
-var design = generateDesign(min_payoff,rVec);
-var payoff = design[0];
-var r = design[1];
-var eu = design[2];
 
-// // payoffs list
-// var payoff = [
-//     6.66666666666667,7.66666666666667,8.66666666666667,9.66666666666667,8.33333333333333,9.33333333333333,10.3333333333333,10,11,11.6666666666667,6.50000000000000,7.50000000000000,8.50000000000000,9.50000000000000,8,9,10,9.50000000000000,10.5000000000000,11,6.33333333333333,7.33333333333333,8.33333333333333,9.33333333333333,7.66666666666667,8.66666666666667,9.66666666666667,9,10,10.3333333333333,6.25000000000000,7.25000000000000,8.25000000000000,9.25000000000000,7.50000000000000,8.50000000000000,9.50000000000000,8.75000000000000,9.75000000000000,10,6.20000000000000,7.20000000000000,8.20000000000000,9.20000000000000,7.40000000000000,8.40000000000000,9.40000000000000,8.60000000000000,9.60000000000000,9.80000000000000,6.16666666666667,7.16666666666667,8.16666666666667,9.16666666666667,7.33333333333333,8.33333333333333,9.33333333333333,8.50000000000000,9.50000000000000,9.66666666666667,6.14285714285714,7.14285714285714,8.14285714285714,9.14285714285714,7.28571428571429,8.28571428571429,9.28571428571429,8.42857142857143,9.42857142857143,9.57142857142857,6.12500000000000,7.12500000000000,8.12500000000000,9.12500000000000,7.25000000000000,8.25000000000000,9.25000000000000,8.37500000000000,9.37500000000000,9.50000000000000,6.11111111111111,7.11111111111111,8.11111111111111,9.11111111111111,7.22222222222222,8.22222222222222,9.22222222222222,8.33333333333333,9.33333333333333,9.44444444444445,6.66666666666667,7.66666666666667,8.66666666666667,9.66666666666667,8.33333333333333,9.33333333333333,10.3333333333333,10,11,11.6666666666667,6.50000000000000,7.50000000000000,8.50000000000000,9.50000000000000,8,9,10,9.50000000000000,10.5000000000000,11,6.33333333333333,7.33333333333333,8.33333333333333,9.33333333333333,7.66666666666667,8.66666666666667,9.66666666666667,9,10,10.3333333333333,6.25000000000000,7.25000000000000,8.25000000000000,9.25000000000000,7.50000000000000,8.50000000000000,9.50000000000000,8.75000000000000,9.75000000000000,10,6.20000000000000,7.20000000000000,8.20000000000000,9.20000000000000,7.40000000000000,8.40000000000000,9.40000000000000,8.60000000000000,9.60000000000000,9.80000000000000,6.16666666666667,7.16666666666667,8.16666666666667,9.16666666666667,7.33333333333333,8.33333333333333,9.33333333333333,8.50000000000000,9.50000000000000,9.66666666666667,6.14285714285714,7.14285714285714,8.14285714285714,9.14285714285714,7.28571428571429,8.28571428571429,9.28571428571429,8.42857142857143,9.42857142857143,9.57142857142857,6.12500000000000,7.12500000000000,8.12500000000000,9.12500000000000,7.25000000000000,8.25000000000000,9.25000000000000,8.37500000000000,9.37500000000000,9.50000000000000,6.11111111111111,7.11111111111111,8.11111111111111,9.11111111111111,7.22222222222222,8.22222222222222,9.22222222222222,8.33333333333333,9.33333333333333,9.44444444444445,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,6,7,8,9,7,8,9,8,9,9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9,6,6,6,6,7,7,7,8,8,9
-//     // 2.66666666666667,3.66666666666667,4.66666666666667,5.66666666666667,4.33333333333333,5.33333333333333,6.33333333333333,6,7,7.66666666666667,2.50000000000000,3.50000000000000,4.50000000000000,5.50000000000000,4,5,6,5.50000000000000,6.50000000000000,7,2.33333333333333,3.33333333333333,4.33333333333333,5.33333333333333,3.66666666666667,4.66666666666667,5.66666666666667,5,6,6.33333333333333,2.25000000000000,3.25000000000000,4.25000000000000,5.25000000000000,3.50000000000000,4.50000000000000,5.50000000000000,4.75000000000000,5.75000000000000,6,2.20000000000000,3.20000000000000,4.20000000000000,5.20000000000000,3.40000000000000,4.40000000000000,5.40000000000000,4.60000000000000,5.60000000000000,5.80000000000000,2.16666666666667,3.16666666666667,4.16666666666667,5.16666666666667,3.33333333333333,4.33333333333333,5.33333333333333,4.50000000000000,5.50000000000000,5.66666666666667,2.14285714285714,3.14285714285714,4.14285714285714,5.14285714285714,3.28571428571429,4.28571428571429,5.28571428571429,4.42857142857143,5.42857142857143,5.57142857142857,2.12500000000000,3.12500000000000,4.12500000000000,5.12500000000000,3.25000000000000,4.25000000000000,5.25000000000000,4.37500000000000,5.37500000000000,5.50000000000000,2.11111111111111,3.11111111111111,4.11111111111111,5.11111111111111,3.22222222222222,4.22222222222222,5.22222222222222,4.33333333333333,5.33333333333333,5.44444444444445,2.66666666666667,3.66666666666667,4.66666666666667,5.66666666666667,4.33333333333333,5.33333333333333,6.33333333333333,6,7,7.66666666666667,2.50000000000000,3.50000000000000,4.50000000000000,5.50000000000000,4,5,6,5.50000000000000,6.50000000000000,7,2.33333333333333,3.33333333333333,4.33333333333333,5.33333333333333,3.66666666666667,4.66666666666667,5.66666666666667,5,6,6.33333333333333,2.25000000000000,3.25000000000000,4.25000000000000,5.25000000000000,3.50000000000000,4.50000000000000,5.50000000000000,4.75000000000000,5.75000000000000,6,2.20000000000000,3.20000000000000,4.20000000000000,5.20000000000000,3.40000000000000,4.40000000000000,5.40000000000000,4.60000000000000,5.60000000000000,5.80000000000000,2.16666666666667,3.16666666666667,4.16666666666667,5.16666666666667,3.33333333333333,4.33333333333333,5.33333333333333,4.50000000000000,5.50000000000000,5.66666666666667,2.14285714285714,3.14285714285714,4.14285714285714,5.14285714285714,3.28571428571429,4.28571428571429,5.28571428571429,4.42857142857143,5.42857142857143,5.57142857142857,2.12500000000000,3.12500000000000,4.12500000000000,5.12500000000000,3.25000000000000,4.25000000000000,5.25000000000000,4.37500000000000,5.37500000000000,5.50000000000000,2.11111111111111,3.11111111111111,4.11111111111111,5.11111111111111,3.22222222222222,4.22222222222222,5.22222222222222,4.33333333333333,5.33333333333333,5.44444444444445,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,2,3,4,5,3,4,5,4,5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5,2,2,2,2,3,3,3,4,4,5
-// ];
+// // generate payoffs
+// var rVec = [0.55, 0.6, 0.7, 0.8, 0.9, 0.95];
+// var min_payoff = 5;
+// generateDesign = function(min_payoff,rVec){
+//     // determine multiplier based on risk levels
+//     var xVec = [];
+//     for(var i = 0; i < rVec.length; i++){
+//         var m = rVec[i]/(1-rVec[i]);
+//         xVec.push(m);
+//     }
+//     var cVec = min_payoff;
+//     var dVec = Array(5).fill().map((element, index) => index + cVec);
+//     var bVec = Array(5).fill().map((element, index) => index + cVec);
+//     var aVec = [];
+//     var A = [];
+//     var B = [];
+//     var C = [];
+//     var D = [];
+//     var E = [];
+//     var R = [];
+//     for(var x = 0; x < xVec.length; x++){
+//         for(var d = 0; d < dVec.length; d++){
+//             for(var b = 0; b < bVec.length; b++){
+//                 if(bVec[b]>=dVec[d] & dVec[d]>cVec & xVec[x]>1){
+//                     aVec = (dVec[d]-cVec)/xVec[x] + bVec[b];
+//                     r = (dVec[d]-cVec)/(dVec[d]-cVec+aVec-bVec[b]);
+//                     eu = r*aVec + (1-r)*cVec;
+//                     A.push(aVec);
+//                     B.push(bVec[b]);
+//                     C.push(cVec);
+//                     D.push(dVec[d]);
+//                     R.push(r);
+//                     E.push(eu);
+//                     aVec = [];
+//                 }
+//             }
+//         }
+//     }
+//     var design = [A,A,C,B,B,C,D,D];
+//     return  [design,R,E];
+// }
+// var design = generateDesign(min_payoff,rVec);
+// var payoff = design[0];
+// var r = design[1];
+// var eu = design[2];
 
-// // r list
-// var r = [
-//     0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.750000000000000,0.750000000000001,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.833333333333333,0.833333333333334,0.833333333333334,0.833333333333334,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.857142857142857,0.857142857142856,0.857142857142858,0.857142857142858,0.857142857142858,0.857142857142857,0.857142857142857,0.857142857142857,0.857142857142857,0.857142857142857,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000
-//     // 0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.600000000000000,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.666666666666667,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.750000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.800000000000000,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.833333333333333,0.857142857142857,0.857142857142858,0.857142857142857,0.857142857142857,0.857142857142857,0.857142857142857,0.857142857142857,0.857142857142857,0.857142857142857,0.857142857142857,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.875000000000000,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.888888888888889,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000,0.900000000000000
-// ];
+var A = [
+    9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00
+];
 
-// // eu list
-// var eu = [
-//     6,6.60000000000000,7.20000000000000,7.80000000000000,7,7.60000000000000,8.20000000000000,8,8.60000000000000,9,6,6.66666666666667,7.33333333333333,8,7,7.66666666666667,8.33333333333333,8,8.66666666666667,9,6,6.75000000000000,7.50000000000000,8.25000000000000,7.00000000000000,7.75000000000000,8.50000000000000,8,8.75000000000000,9,6,6.80000000000000,7.60000000000000,8.40000000000000,7,7.80000000000000,8.60000000000000,8,8.80000000000000,9,6,6.83333333333334,7.66666666666667,8.50000000000000,7,7.83333333333333,8.66666666666667,8,8.83333333333333,9,6,6.85714285714286,7.71428571428572,8.57142857142857,7.00000000000000,7.85714285714286,8.71428571428571,8,8.85714285714286,9,6,6.87500000000000,7.75000000000000,8.62500000000000,7.00000000000000,7.87500000000000,8.75000000000000,8,8.87500000000000,9,6,6.88888888888889,7.77777777777778,8.66666666666667,7,7.88888888888889,8.77777777777778,8,8.88888888888889,9,6,6.90000000000000,7.80000000000000,8.70000000000000,7.00000000000000,7.90000000000000,8.80000000000000,8,8.90000000000000,9
-//     // 2,2.60000000000000,3.20000000000000,3.80000000000000,3,3.60000000000000,4.20000000000000,4.00000000000000,4.60000000000000,5,2,2.66666666666667,3.33333333333333,4,3,3.66666666666667,4.33333333333333,4,4.66666666666667,5.00000000000000,2,2.75000000000000,3.50000000000000,4.25000000000000,3.00000000000000,3.75000000000000,4.50000000000000,4,4.75000000000000,5.00000000000000,2,2.80000000000000,3.60000000000000,4.40000000000000,3,3.80000000000000,4.60000000000000,4,4.80000000000000,5.00000000000000,2,2.83333333333333,3.66666666666667,4.50000000000000,3,3.83333333333333,4.66666666666667,4.00000000000000,4.83333333333333,5,2,2.85714285714286,3.71428571428571,4.57142857142857,3.00000000000000,3.85714285714286,4.71428571428571,4.00000000000000,4.85714285714286,5.00000000000000,2,2.87500000000000,3.75000000000000,4.62500000000000,3,3.87500000000000,4.75000000000000,4.00000000000000,4.87500000000000,5,2,2.88888888888889,3.77777777777778,4.66666666666667,3,3.88888888888889,4.77777777777778,4,4.88888888888889,5,2,2.90000000000000,3.80000000000000,4.70000000000000,3,3.90000000000000,4.80000000000000,4,4.90000000000000,5
-// ];
+var B = [
+    5.04, 5.60, 5.90, 6.56, 6.86, 7.22, 7.80, 8.04, 8.52, 8.62, 5.14, 5.46, 6.10, 6.32, 6.68, 7.38, 7.50, 8.06, 8.54, 8.66, 5.34, 5.48, 5.82, 6.48, 6.88, 7.14, 7.68, 8.02, 8.54, 8.74, 6.66, 7.12, 7.24, 7.60, 7.82, 8.16, 8.06, 8.50, 8.60, 8.88, 7.88, 8.10, 8.08, 8.30, 8.28, 8.54, 8.56, 8.74, 8.84, 8.92, 8.44, 8.48, 8.60, 8.70, 8.72, 8.74, 8.80, 8.90, 8.92, 8.98, 8.82, 8.92, 8.98, 8.94, 8.94, 8.96, 8.98, 8.94, 8.98, 8.98
+];
+
+var C = [
+    6.90, 6.80, 6.94, 6.76, 6.86, 6.90, 6.90, 6.94, 6.98, 6.98, 6.18, 5.94, 6.16, 6.38, 6.54, 6.54, 6.68, 6.74, 6.90, 6.94, 5.14, 5.18, 5.32, 5.36, 5.74, 5.86, 6.40, 6.54, 6.76, 6.88, 5.00, 5.26, 5.42, 5.72, 5.88, 6.10, 6.22, 6.46, 6.62, 6.90, 5.12, 5.32, 5.44, 5.66, 5.84, 6.04, 6.34, 6.60, 6.72, 6.84, 5.14, 5.40, 5.52, 5.70, 5.86, 6.14, 6.40, 6.56, 6.66, 6.94, 5.04, 5.22, 5.52, 5.76, 5.90, 6.18, 6.28, 6.44, 6.76, 6.82
+];
+
+var D = [
+    7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00
+];
+
+var payoff = [A, A, C, B, B, C, D, D];
+
+var r = [
+    0.02463054, 0.05555556, 0.01898734, 0.08955224, 0.06140351, 0.05319149, 0.07692308, 0.05882353, 0.04000000, 0.05000000, 0.17521368, 0.23043478, 0.22459893, 0.18787879, 0.16546763, 0.22115385, 0.17582418, 0.21666667, 0.17857143, 0.15000000, 0.33695652, 0.34082397, 0.34567901, 0.39423077, 0.37278107, 0.38000000, 0.31250000, 0.31944444, 0.34285714, 0.31578947, 0.46082949, 0.48066298, 0.47305389, 0.47761194, 0.48695652, 0.51724138, 0.45348837, 0.51923077, 0.48717949, 0.45454545, 0.62666667, 0.65116279, 0.62903226, 0.65686275, 0.61702128, 0.67605634, 0.60000000, 0.60606061, 0.63636364, 0.66666667, 0.76859504, 0.75471698, 0.78723404, 0.81250000, 0.80281690, 0.76785714, 0.75000000, 0.81481481, 0.80952381, 0.75000000, 0.91588785, 0.95698925, 0.98666667, 0.95384615, 0.94827586, 0.95348837, 0.97297297, 0.90322581, 0.92307692, 0.90000000
+];
+
+var r_mean = [
+    0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.80, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95
+];
+
+var eu = [
+    6.951724, 6.922222, 6.979114, 6.960597, 6.991404, 7.011702, 7.061538, 7.061176, 7.060800, 7.081000, 6.674103, 6.645130, 6.797861, 6.872242, 6.947050, 7.084038, 7.087912, 7.229667, 7.275000, 7.249000, 6.440652, 6.481948, 6.592099, 6.795000, 6.955266, 7.053200, 7.212500, 7.325833, 7.528000, 7.549474, 6.843318, 7.057680, 7.113533, 7.286567, 7.399304, 7.600000, 7.480698, 7.778846, 7.779487, 7.854545, 7.551467, 7.716279, 7.679355, 7.853922, 7.789787, 8.041127, 7.936000, 8.054545, 8.170909, 8.280000, 8.106777, 8.116981, 8.259574, 8.381250, 8.380845, 8.336071, 8.350000, 8.548148, 8.554286, 8.485000, 8.666916, 8.837419, 8.953600, 8.850462, 8.839655, 8.868837, 8.926486, 8.752258, 8.827692, 8.782000
+];
+
+var n_game_r = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+];
+
+var n_game = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70
+];
 
 
 downloadCSV = function (csv, filename) {
@@ -96,7 +114,7 @@ downloadCSV = function (csv, filename) {
 };
 
 var payFailQuiz1 = '75c';
-var payFailQuiz2 = '300c';
+var payFailQuiz2 = '500c';
 
 /**************/
 /** Constants */
@@ -304,8 +322,14 @@ function getShuffledGameParam(param,randInd){
 
 var rShuffledChoice = getShuffledGameParam(r,randIndChoice);
 var rShuffledBelief = getShuffledGameParam(r,randIndBelief);
+var r_meanShuffledChoice = getShuffledGameParam(r_mean,randIndChoice);
+var r_meanShuffledBelief = getShuffledGameParam(r_mean,randIndBelief);
 var euShuffledChoice = getShuffledGameParam(eu,randIndChoice);
 var euShuffledBelief = getShuffledGameParam(eu,randIndBelief);
+var n_gameShuffledChoice = getShuffledGameParam(n_game,randIndChoice);
+var n_gameShuffledBelief = getShuffledGameParam(n_game,randIndBelief);
+var n_game_rShuffledChoice = getShuffledGameParam(n_game_r,randIndChoice);
+var n_game_rShuffledBelief = getShuffledGameParam(n_game_r,randIndBelief);
 
 // randomize display of each action - choice phase
 function getRandDisplayChoice(n){
@@ -450,7 +474,7 @@ var choiceInstructions = {
     }
 }
 
-// quiz about the choice task
+// quiz about the choice task with feedback
 var question_choice_1_options = ["5",
                         "7",
                         "8",
@@ -472,22 +496,25 @@ var question_choice_5_options = ["TRUE",
 var question_choice_6_options = ["TRUE",
                         "FALSE"];
 
-// still to finish
-var passedQuiz1 = 1;
-var choice_quiz_data = [];
-var controlQuestionsChoice = {
+// highlight correct answer with green and provide explanation at the bottom
+var questions_choice_data = [];
+var feedback_question_choice_1 = [];
+var feedback_question_choice_2 = [];
+var feedback_question_choice_3 = [];
+var feedback_question_choice_4 = [];
+var feedback_question_choice_5 = [];
+var feedback_question_choice_6 = [];
+
+
+// question 1
+var controlQuestionChoice1 = {
     type: 'survey-multi-choice',
     questions: [
         { prompt: "Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will you earn?", name: 'Q1', options: question_choice_1_options, required: true },
-        { prompt: "Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will they earn?", name: 'Q2', options: question_choice_2_options, required: true },
-        { prompt: "Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will you earn?", name: 'Q3', options: question_choice_3_options, required: true },
-        { prompt: "Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will they earn?", name: 'Q4', options: question_choice_4_options, required: true },
-        { prompt: "Question 5: The participant with whom you are paired will be determined randomly.", name: 'Q5', options: question_choice_5_options, required: true },
-        { prompt: "Question 6: When you make your choice, you will be able to see what the COLUMN CHOOSER has chosen.", name: 'Q6', options: question_choice_6_options, required: true }
     ],
     preamble: `<div> 
         <br><br/>
-        Please answer the following questions to begin today's study. Scroll down to see all questions.</div>
+        Please answer the following question.</div>
         <br><br/>
         <div>Consider the following table.</div>
     </div>
@@ -495,17 +522,412 @@ var controlQuestionsChoice = {
     <img class = 'img_questions' src="img/control/control_img_1.png"></img>
     <br><br/>`,
     on_finish: function (data) {
-        choice_quiz_data.push(data);
-        document.body.style.cursor = 'none';
-        nCorrectChoice = getAnswersChoiceQuiz(choice_quiz_data);
-        if(nCorrectChoice<4){
-            survey_code = makeSurveyCode('failed');
-            closeFullscreen();
-            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> You will receive ${payFailQuiz1} for making it this far. Your survey code is: ${survey_code}${payFailQuiz1}. Thank you for signing up!`);
-            passedQuiz1 = 0;
+        questions_choice_data.push(data);
+        if(data.responses.includes("9")){
+            data.correct = true; // can add property correct by modify data object directly
+          } else {
+            data.correct = false;
         }
     }
 };
+
+var controlQuestionChoice1Response = {
+    type: 'html-keyboard-response',
+    stimulus: function(){
+        feedback_question_choice_1 = jsPsych.data.get().last(1).values()[0].correct;
+        if(feedback_question_choice_1){
+          return `
+          <div>Your answer was <font size=120%; font color = 'green';> correct </font>!</div>
+          <br><br/> 
+            When you are ready, press the  <b>SPACE BAR</b> to continue. 
+            <br><br/> </div>
+          `;
+        } else {
+          return `
+          <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
+          <br><br/> 
+          <div>Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will you earn?</div>
+          <br><br/> 
+          <br><br/>
+          <img class = 'img_questions' src="img/control/control_img_1.png"></img>
+          <br><br/>
+            <br><br/>
+            5 <br>
+            7 <br>
+            8 <br>
+            9 <br>
+            <br><br/>
+            The correct answer is: <font color = 'green';> 9 </font>.
+            <br><br/>
+            If the COLUMN CHOOSER selects the column L and you select the row T, then you end up in the UPPER-LEFT cell of the table.
+            <br><br/>
+            Your payoff is represented in GREEN.<br>
+            The COLUMN CHOOSER'S payoff is represented in RED. <br>
+            Therefore, you will earn <font color = 'green';> 9 </font> dollars. 
+            <br><br/>
+          When you are ready, press the  <b>SPACE BAR</b> to continue. 
+          <br><br/> 
+          </div>`
+        }
+    },
+    post_trial_gap: 500,
+    choices: ['spacebar'],
+}
+
+// question 2
+var controlQuestionChoice2 = {
+    type: 'survey-multi-choice',
+    questions: [
+        { prompt: "Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will they earn?", name: 'Q2', options: question_choice_2_options, required: true },
+    ],
+    preamble: `<div> 
+        <br><br/>
+        Please answer the following question. </div>
+        <br><br/>
+        <div>Consider the following table.</div>
+    </div>
+    <br><br/>
+    <img class = 'img_questions' src="img/control/control_img_1.png"></img>
+    <br><br/>`,
+    on_finish: function (data) {
+        questions_choice_data.push(data);
+        if(data.responses.includes("8")){
+            data.correct = true; // can add property correct by modify data object directly
+          } else {
+            data.correct = false;
+        }
+    }
+};
+
+var controlQuestionChoice2Response = {
+    type: 'html-keyboard-response',
+    stimulus: function(){
+        feedback_question_choice_2 = jsPsych.data.get().last(1).values()[0].correct;
+        if(feedback_question_choice_2){
+          return `
+          <div>Your answer was <font size=120%; font color = 'green';> correct </font>!</div>
+          <br><br/> 
+            When you are ready, press the  <b>SPACE BAR</b> to continue. 
+            <br><br/> </div>
+          `;
+        } else {
+          return `
+          <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
+          <br><br/> 
+          <div>Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will they earn?</div>
+          <br><br/> 
+          <br><br/>
+          <img class = 'img_questions' src="img/control/control_img_1.png"></img>
+          <br><br/>
+            <br><br/>
+            6 <br>
+            7 <br>
+            8 <br>
+            9 <br>
+            <br><br/>
+            The correct answer is: <font color = 'green';> 8 </font>.
+            <br><br/>
+            If the COLUMN CHOOSER selects the column L and you select the row T, then you end up in the UPPER-LEFT cell of the table.
+            <br><br/>
+            Your payoff is represented in GREEN.<br>
+            The COLUMN CHOOSER'S payoff is represented in RED. <br>
+            Therefore, they will earn <font color = 'green';> 8 </font> dollars. 
+            <br><br/>
+          When you are ready, press the  <b>SPACE BAR</b> to continue. 
+          <br><br/> 
+          </div>`
+        }
+    },
+    post_trial_gap: 500,
+    choices: ['spacebar'],
+}
+
+// question 3
+var controlQuestionChoice3 = {
+    type: 'survey-multi-choice',
+    questions: [
+        { prompt: "Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will you earn?", name: 'Q3', options: question_choice_3_options, required: true },
+    ],
+    preamble: `<div> 
+        <br><br/>
+        Please answer the following question. </div>
+        <br><br/>
+        <div>Consider the following table.</div>
+    </div>
+    <br><br/>
+    <img class = 'img_questions' src="img/control/control_img_1.png"></img>
+    <br><br/>`,
+    on_finish: function (data) {
+        questions_choice_data.push(data);
+        if(data.responses.includes("7")){
+            data.correct = true; // can add property correct by modify data object directly
+          } else {
+            data.correct = false;
+        }
+    }
+};
+
+var controlQuestionChoice3Response = {
+    type: 'html-keyboard-response',
+    stimulus: function(){
+        feedback_question_choice_3 = jsPsych.data.get().last(1).values()[0].correct;
+        if(feedback_question_choice_3){
+          return `
+          <div>Your answer was <font size=120%; font color = 'green';> correct </font>!</div>
+          <br><br/> 
+            When you are ready, press the  <b>SPACE BAR</b> to continue. 
+            <br><br/> </div>
+          `;
+        } else {
+          return `
+          <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
+          <br><br/> 
+          <div>Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will you earn?</div>
+          <br><br/> 
+          <br><br/>
+          <img class = 'img_questions' src="img/control/control_img_1.png"></img>
+          <br><br/>
+            <br><br/>
+            5 <br>
+            7 <br>
+            8 <br>
+            9 <br>
+            <br><br/>
+            The correct answer is: <font color = 'green';> 7 </font>.
+            <br><br/>
+            If the COLUMN CHOOSER selects the column L and you select the row B, then you end up in the LOWER-LEFT cell of the table.
+            <br><br/>
+            Your payoff is represented in GREEN.<br>
+            The COLUMN CHOOSER'S payoff is represented in RED. <br>
+            Therefore, you will earn <font color = 'green';> 7 </font> dollars. 
+            <br><br/>
+          When you are ready, press the  <b>SPACE BAR</b> to continue. 
+          <br><br/> 
+          </div>`
+        }
+    },
+    post_trial_gap: 500,
+    choices: ['spacebar'],
+}
+
+// question 4
+var controlQuestionChoice4 = {
+    type: 'survey-multi-choice',
+    questions: [
+        { prompt: "Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will they earn?", name: 'Q4', options: question_choice_4_options, required: true },
+    ],
+    preamble: `<div> 
+        <br><br/>
+        Please answer the following question. </div>
+        <br><br/>
+        <div>Consider the following table.</div>
+    </div>
+    <br><br/>
+    <img class = 'img_questions' src="img/control/control_img_1.png"></img>
+    <br><br/>`,
+    on_finish: function (data) {
+        questions_choice_data.push(data);
+        if(data.responses.includes("5")){
+            data.correct = true; // can add property correct by modify data object directly
+          } else {
+            data.correct = false;
+        }
+    }
+};
+
+var controlQuestionChoice4Response = {
+    type: 'html-keyboard-response',
+    stimulus: function(){
+        feedback_question_choice_4 = jsPsych.data.get().last(1).values()[0].correct;
+        if(feedback_question_choice_4){
+          return `
+          <div>Your answer was <font size=120%; font color = 'green';> correct </font>!</div>
+          <br><br/> 
+            When you are ready, press the  <b>SPACE BAR</b> to continue. 
+            <br><br/> </div>
+          `;
+        } else {
+          return `
+          <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
+          <br><br/> 
+          <div>Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will they earn?</div>
+          <br><br/> 
+          <br><br/>
+          <img class = 'img_questions' src="img/control/control_img_1.png"></img>
+          <br><br/>
+            <br><br/>
+            5 <br>
+            7 <br>
+            8 <br>
+            9 <br>
+            <br><br/>
+            The correct answer is: <font color = 'green';> 5 </font>.
+            <br><br/>
+            If the COLUMN CHOOSER selects the column L and you select the row B, then you end up in the UPPER-LEFT cell of the table.
+            <br><br/>
+            Your payoff is represented in GREEN.<br>
+            The COLUMN CHOOSER'S payoff is represented in RED. <br>
+            Therefore, you will earn <font color = 'green';> 5 </font> dollars. 
+            <br><br/>
+          When you are ready, press the  <b>SPACE BAR</b> to continue. 
+          <br><br/> 
+          </div>`
+        }
+    },
+    post_trial_gap: 500,
+    choices: ['spacebar'],
+}
+
+
+// question 5
+var controlQuestionChoice5 = {
+    type: 'survey-multi-choice',
+    questions: [
+        { prompt: "Question 5: The participant with whom you are paired will be determined randomly.", name: 'Q5', options: question_choice_5_options, required: true },
+    ],
+    preamble: `<div> 
+        <br><br/>
+        Please answer the following question. </div>
+    <br><br/>`,
+    on_finish: function (data) {
+        questions_choice_data.push(data);
+        if(data.responses.includes("TRUE")){
+            data.correct = true; // can add property correct by modify data object directly
+          } else {
+            data.correct = false;
+        }
+    }
+};
+
+var controlQuestionChoice5Response = {
+    type: 'html-keyboard-response',
+    stimulus: function(){
+        feedback_question_choice_5 = jsPsych.data.get().last(1).values()[0].correct;
+        if(feedback_question_choice_5){
+          return `
+          <div>Your answer was <font size=120%; font color = 'green';> correct </font>!</div>
+          <br><br/> 
+            When you are ready, press the  <b>SPACE BAR</b> to continue. 
+            <br><br/> </div>
+          `;
+        } else {
+          return `
+          <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
+          <br><br/> 
+          <div>Question 5: The participant with whom you are paired will be determined randomly.</div>
+            <br><br/>
+            TRUE <br>
+            FALSE <br>
+            <br><br/>
+            The correct answer is: <font color = 'green';> TRUE </font>.
+            <br><br/>
+            For each decision, you are paired randomly with another participant in the study.
+            <br><br/>
+            Therefore, the correct answer is <font color = 'green';> TRUE </font>. 
+            <br><br/>
+          When you are ready, press the  <b>SPACE BAR</b> to continue. 
+          <br><br/> 
+          </div>`
+        }
+    },
+    post_trial_gap: 500,
+    choices: ['spacebar'],
+}
+
+// question 6
+var controlQuestionChoice6 = {
+    type: 'survey-multi-choice',
+    questions: [
+        { prompt: "Question 6: When you make your choice, you will be able to see what the COLUMN CHOOSER has chosen.", name: 'Q6', options: question_choice_6_options, required: true },
+    ],
+    preamble: `<div> 
+        <br><br/>
+        Please answer the following question. </div>
+    <br><br/>`,
+    on_finish: function (data) {
+        questions_choice_data.push(data);
+        if(data.responses.includes("FALSE")){
+            data.correct = true; // can add property correct by modify data object directly
+          } else {
+            data.correct = false;
+        }
+    }
+};
+
+var controlQuestionChoice6Response = {
+    type: 'html-keyboard-response',
+    stimulus: function(){
+        feedback_question_choice_6 = jsPsych.data.get().last(1).values()[0].correct;
+        if(feedback_question_choice_6){
+          return `
+          <div>Your answer was <font size=120%; font color = 'green';> correct </font>!</div>
+          <br><br/> 
+            When you are ready, press the  <b>SPACE BAR</b> to continue. 
+            <br><br/> </div>
+          `;
+        } else {
+          return `
+          <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
+          <br><br/> 
+          <div>Question 6: When you make your choice, you will be able to see what the COLUMN CHOOSER has chosen.</div>
+            <br><br/>
+            TRUE <br>
+            FALSE <br>
+            <br><br/>
+            The correct answer is: <font color = 'green';> FALSE </font>.
+            <br><br/>
+            You will not be able to see what the COLUMN CHOOSER did before you make your decision.
+            <br><br/>
+            Therefore, the correct answer is <font color = 'green';> FALSE </font>. 
+            <br><br/>
+          When you are ready, press the  <b>SPACE BAR</b> to continue. 
+          <br><br/> 
+          </div>`
+        }
+    },
+    post_trial_gap: 500,
+    choices: ['spacebar'],
+}
+
+
+
+// quiz about the choice task
+
+
+// // still to finish
+// var passedQuiz1 = 1;
+// var choice_quiz_data = [];
+// var controlQuestionsChoice = {
+//     type: 'survey-multi-choice',
+//     questions: [
+//         { prompt: "Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will you earn?", name: 'Q1', options: question_choice_1_options, required: true },
+//         { prompt: "Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will they earn?", name: 'Q2', options: question_choice_2_options, required: true },
+//         { prompt: "Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will you earn?", name: 'Q3', options: question_choice_3_options, required: true },
+//         { prompt: "Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will they earn?", name: 'Q4', options: question_choice_4_options, required: true },
+//         { prompt: "Question 5: The participant with whom you are paired will be determined randomly.", name: 'Q5', options: question_choice_5_options, required: true },
+//         { prompt: "Question 6: When you make your choice, you will be able to see what the COLUMN CHOOSER has chosen.", name: 'Q6', options: question_choice_6_options, required: true }
+//     ],
+//     preamble: `<div> 
+//         <br><br/>
+//         Please answer the following questions to begin today's study. Scroll down to see all questions.</div>
+//         <br><br/>
+//         <div>Consider the following table.</div>
+//     </div>
+//     <br><br/>
+//     <img class = 'img_questions' src="img/control/control_img_1.png"></img>
+//     <br><br/>`,
+//     on_finish: function (data) {
+//         choice_quiz_data.push(data);
+//         document.body.style.cursor = 'none';
+//         nCorrectChoice = getAnswersChoiceQuiz(choice_quiz_data);
+//         if(nCorrectChoice<4){
+//             survey_code = makeSurveyCode('failed');
+//             closeFullscreen();
+//             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> You will receive ${payFailQuiz1} for making it this far. Your survey code is: ${survey_code}${payFailQuiz1}. Thank you for signing up!`);
+//             passedQuiz1 = 0;
+//         }
+//     }
+// };
 
 
 
@@ -539,7 +961,10 @@ var game_choice = {
             stimulus_order: () => randIndChoice[choice_count],
             stimulus_display: () => randDisplayOrderChoice[choice_count],
             stimulus_r: () => rShuffledChoice[choice_count],
+            stimulus_r_mean: () => r_meanShuffledChoice[choice_count],
             stimulus_eu: () => euShuffledChoice[choice_count],
+            stimulus_n_game: () => n_gameShuffledChoice[choice_count],
+            stimulus_n_game_r: () => n_game_rShuffledChoice[choice_count],
             realOrPrac: false,
             doEyeTracking: false,
             // stimulus_duration: 3000,
@@ -586,20 +1011,22 @@ var question_belief_2_options = ["$11",
 var question_belief_3_options = ["TRUE",
                          "FALSE"];
 
-// still to finish
-var passedQuiz2 = 1;
-var belief_quiz_data = [];
-var controlQuestionsBelief = {
+
+var questions_belief_data = [];
+var feedback_question_belief_1 = [];
+var feedback_question_belief_2 = [];
+var feedback_question_belief_3 = [];
+                         
+// question 1
+var controlQuestionBelief1 = {
     type: 'survey-multi-choice',
     questions: [
         { prompt: "Question 1: Suppose you estimate that 60% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q1', options: question_belief_1_options, required: true },
-        { prompt: "Question 2: Suppose you estimate that 87% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q2', options: question_belief_2_options, required: true },
-        { prompt: "Question 3: You will receive your payment for this part of the experiment immediately.", name: 'Q3', options: question_belief_3_options, required: true }
     ],
     preamble: `<div> 
-        <br><br/>
-        Please answer the following questions to begin today's study. Scroll down to see all questions.</div>
-        <div>Consider the following table.</div>
+    <br><br/>
+    Please answer the following question. </div>
+    <div>Consider the following table.</div>
     </div>
     <br><br/>
     <img class = 'img_questions' src="img/control/control_img_2.png"></img>
@@ -615,17 +1042,242 @@ var controlQuestionsBelief = {
     </div>
     <br><br/>`,
     on_finish: function (data) {
-        belief_quiz_data.push(data);
-        document.body.style.cursor = 'none';
-        nCorrectBelief = getAnswersBeliefQuiz(belief_quiz_data);
-        if(nCorrectBelief<2){
-            survey_code = makeSurveyCode('failed');
-            closeFullscreen();
-            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> You will receive  ${payFailQuiz2} for making it this far. Your survey code is: ${survey_code}${payFailQuiz2}. Thank you for signing up!`);
-            passedQuiz2 = 0;
+        questions_belief_data.push(data);
+        if(data.responses.includes("$5")){
+            data.correct = true; // can add property correct by modify data object directly
+        } else {
+            data.correct = false;
         }
     }
 };
+
+var controlQuestionBelief1Response = {
+    type: 'html-keyboard-response',
+    stimulus: function(){
+        feedback_question_belief_1 = jsPsych.data.get().last(1).values()[0].correct;
+        if(feedback_question_belief_1){
+        return `
+        <div>Your answer was <font size=120%; font color = 'green';> correct </font>!</div>
+        <br><br/> 
+            When you are ready, press the  <b>SPACE BAR</b> to continue. 
+            <br><br/> </div>
+        `;
+        } else {
+        return `
+        <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
+        <br><br/> 
+        <div>Question 1: Suppose you estimate that 60% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?</div>
+        <br><br/> 
+        <br><br/>
+        <img class = 'img_questions' src="img/control/control_img_2.png"></img>
+        <br><br/>
+        <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
+        <div>
+                <div>If your estimate is within 5% of the correct answer you earn $11</div>
+                <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
+                <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
+                <div>Otherwise you earn $5</div>
+        </div>
+            <br><br/>
+            $11 <br>
+            $9 <br>
+            $7 <br>
+            $5 <br>
+            <br><br/>
+            The correct answer is: <font color = 'green';> $5 </font>.
+            <br><br/>
+            The error in your estimate is |80% - 60%| = 20%.
+            <br><br/>
+            Therefore, you earn <font color = 'green';> $5 </font>. 
+            <br><br/>
+        When you are ready, press the  <b>SPACE BAR</b> to continue. 
+        <br><br/> 
+        </div>`
+        }
+    },
+    post_trial_gap: 500,
+    choices: ['spacebar'],
+}
+                         
+
+// question 2
+var controlQuestionBelief2 = {
+    type: 'survey-multi-choice',
+    questions: [
+        { prompt: "Question 2: Suppose you estimate that 87% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q2', options: question_belief_2_options, required: true },
+    ],
+    preamble: `<div> 
+    <br><br/>
+    Please answer the following question. </div>
+    <div>Consider the following table.</div>
+    </div>
+    <br><br/>
+    <img class = 'img_questions' src="img/control/control_img_2.png"></img>
+    <br><br/>
+    <div>Suppose that 80% of the participants in the study selected action L in the table above.</div>
+    <br><br/>
+    <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
+    <div>
+            <div>If your estimate is within 5% of the correct answer you earn $11</div>
+            <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
+            <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
+            <div>Otherwise you earn $5</div>
+    </div>
+    <br><br/>`,
+    on_finish: function (data) {
+        questions_belief_data.push(data);
+        if(data.responses.includes("$9")){
+            data.correct = true; // can add property correct by modify data object directly
+        } else {
+            data.correct = false;
+        }
+    }
+};
+
+var controlQuestionBelief2Response = {
+    type: 'html-keyboard-response',
+    stimulus: function(){
+        feedback_question_belief_2 = jsPsych.data.get().last(1).values()[0].correct;
+        if(feedback_question_belief_2){
+        return `
+        <div>Your answer was <font size=120%; font color = 'green';> correct </font>!</div>
+        <br><br/> 
+            When you are ready, press the  <b>SPACE BAR</b> to continue. 
+            <br><br/> </div>
+        `;
+        } else {
+        return `
+        <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
+        <br><br/> 
+        <div>Question 2: Suppose you estimate that 87% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?</div>
+        <br><br/> 
+        <br><br/>
+        <img class = 'img_questions' src="img/control/control_img_2.png"></img>
+        <br><br/>
+        <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
+        <div>
+                <div>If your estimate is within 5% of the correct answer you earn $11</div>
+                <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
+                <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
+                <div>Otherwise you earn $5</div>
+        </div>
+            <br><br/>
+            $11 <br>
+            $9 <br>
+            $7 <br>
+            $5 <br>
+            <br><br/>
+            The correct answer is: <font color = 'green';> $9 </font>.
+            <br><br/>
+            The error in your estimate is |80% - 87%| = 7%.
+            <br><br/>
+            Therefore, you earn <font color = 'green';> $9 </font>. 
+            <br><br/>
+        When you are ready, press the  <b>SPACE BAR</b> to continue. 
+        <br><br/> 
+        </div>`
+        }
+    },
+    post_trial_gap: 500,
+    choices: ['spacebar'],
+}
+
+
+// question 3
+var controlQuestionBelief3 = {
+    type: 'survey-multi-choice',
+    questions: [
+        { prompt: "Question 3: You will receive your payment for this part of the experiment immediately.", name: 'Q3', options: question_belief_3_options, required: true },
+    ],
+    preamble: `<div> 
+    <br><br/>
+    Please answer the following question. </div>
+    </div>
+    <br><br/>`,
+    on_finish: function (data) {
+        questions_belief_data.push(data);
+        if(data.responses.includes("FALSE")){
+            data.correct = true; // can add property correct by modify data object directly
+        } else {
+            data.correct = false;
+        }
+    }
+};
+
+var controlQuestionBelief3Response = {
+    type: 'html-keyboard-response',
+    stimulus: function(){
+        feedback_question_belief_3 = jsPsych.data.get().last(1).values()[0].correct;
+        if(feedback_question_belief_3){
+        return `
+        <div>Your answer was <font size=120%; font color = 'green';> correct </font>!</div>
+        <br><br/> 
+            When you are ready, press the  <b>SPACE BAR</b> to continue. 
+            <br><br/> </div>
+        `;
+        } else {
+        return `
+        <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
+        <br><br/> 
+        <div>Question 3: You will receive your payment for this part of the experiment immediately.</div>
+        <br><br/> 
+            The correct answer is: <font color = 'green';> FALSE </font>.
+            <br><br/>
+            We will send you the payment within 1 or 2 weeks.
+            <br><br/>
+            Therefore, the correct answer is <font color = 'green';> FALSE </font>. 
+            <br><br/>
+        When you are ready, press the  <b>SPACE BAR</b> to continue. 
+        <br><br/> 
+        </div>`
+        }
+    },
+    post_trial_gap: 500,
+    choices: ['spacebar'],
+}
+
+
+
+// // still to finish
+// var passedQuiz2 = 1;
+// var belief_quiz_data = [];
+// var controlQuestionsBelief = {
+//     type: 'survey-multi-choice',
+//     questions: [
+//         { prompt: "Question 1: Suppose you estimate that 60% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q1', options: question_belief_1_options, required: true },
+//         { prompt: "Question 2: Suppose you estimate that 87% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q2', options: question_belief_2_options, required: true },
+//         { prompt: "Question 3: You will receive your payment for this part of the experiment immediately.", name: 'Q3', options: question_belief_3_options, required: true }
+//     ],
+//     preamble: `<div> 
+//         <br><br/>
+//         Please answer the following question. </div>
+//         <div>Consider the following table.</div>
+//     </div>
+//     <br><br/>
+//     <img class = 'img_questions' src="img/control/control_img_2.png"></img>
+//     <br><br/>
+//     <div>Suppose that 80% of the participants in the study selected action L in the table above.</div>
+//     <br><br/>
+//     <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
+//     <div>
+//             <div>If your estimate is within 5% of the correct answer you earn $11</div>
+//             <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
+//             <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
+//             <div>Otherwise you earn $5</div>
+//     </div>
+//     <br><br/>`,
+//     on_finish: function (data) {
+//         belief_quiz_data.push(data);
+//         document.body.style.cursor = 'none';
+//         nCorrectBelief = getAnswersBeliefQuiz(belief_quiz_data);
+//         if(nCorrectBelief<2){
+//             survey_code = makeSurveyCode('failed');
+//             closeFullscreen();
+//             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> You will receive  ${payFailQuiz2} for making it this far. Your survey code is: ${survey_code}${payFailQuiz2}. Thank you for signing up!`);
+//             passedQuiz2 = 0;
+//         }
+//     }
+// };
 
 
 
@@ -659,8 +1311,11 @@ var game_belief = {
             labels: ['0%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%','100%'],
             stimulus_order: () => randIndBelief[belief_count],
             stimulus_display: () => randDisplayOrderBelief[belief_count],
-            stimulus_r: () => randIndBelief[belief_count],
-            stimulus_eu: () => randIndBelief[belief_count],
+            stimulus_r: () => rShuffledBelief[belief_count],
+            stimulus_r_mean: () => r_meanShuffledBelief[belief_count],
+            stimulus_eu: () => euShuffledBelief[belief_count],
+            stimulus_n_game: () => n_gameShuffledBelief[belief_count],
+            stimulus_n_game_r: () => n_game_rShuffledBelief[belief_count],
             min: 0,
             max: 100,
             prompt: 'What percentage of participants choose action L ?',
@@ -1018,22 +1673,22 @@ var ambiguitySurvey = {
 
 
 
-function getFinalPay(risk_pay,ambiguity_pay){
-    // select randomly part 3 or part 4 payment
-    var randIndPay = getRandomInt(1,2);
-    var payPart = [];
-    var finalPay = [];
-    if(randIndPay===1){
-        finalPay = risk_pay;
-        payPart = 3;
-        // return [finalPay,3]
-    } else {
-        finalPay = ambiguity_pay;
-        payPart = 4;
-        // return [finalPay,4]
-    }
-    return [finalPay,payPart];
-}
+// function getFinalPay(risk_pay,ambiguity_pay){
+//     // select randomly part 3 or part 4 payment
+//     var randIndPay = getRandomInt(1,2);
+//     var payPart = [];
+//     var finalPay = [];
+//     if(randIndPay===1){
+//         finalPay = risk_pay;
+//         payPart = 3;
+//         // return [finalPay,3]
+//     } else {
+//         finalPay = ambiguity_pay;
+//         payPart = 4;
+//         // return [finalPay,4]
+//     }
+//     return [finalPay,payPart];
+// }
 
 
 // var finalEarnings = function displayFinalPay(finalPay){
@@ -1059,13 +1714,11 @@ function getFinalPay(risk_pay,ambiguity_pay){
 //     return html
 // }
 
-var finalPay = [0, 0];
 var successExp = false;
 var success_guard = {
     type: 'call-function',
     func: () => { 
         successExp = true; 
-        finalPay = getFinalPay(risk_pay,ambiguity_pay);
     }
 }
 
@@ -1105,12 +1758,9 @@ var on_finish_callback = function () {
         browser_name: bowser.name,
         browser_type: bowser.version,
         subject: subject_id,
-        subject: subject_id,
         interaction: jsPsych.data.getInteractionData().json(),
         pass_quiz_1: passedQuiz1,
         pass_quiz_2: passedQuiz2,
-        payment: finalPay[0],
-        payment_part: finalPay[1],
         windowWidth: screen.width,
         windowHight: screen.height
     });
@@ -1149,20 +1799,38 @@ function startExperiment() {
             fullscreenEnter,
             experimentOverview,
             choiceInstructions,
-            controlQuestionsChoice,
+            controlQuestionChoice1,
+            controlQuestionChoice1Response,
+            controlQuestionChoice2,
+            controlQuestionChoice2Response,
+            controlQuestionChoice3,
+            controlQuestionChoice3Response,
+            controlQuestionChoice4,
+            controlQuestionChoice4Response,
+            controlQuestionChoice5,
+            controlQuestionChoice5Response,
+            controlQuestionChoice6,
+            controlQuestionChoice6Response,
+            //controlQuestionsChoice,
             choiceOverview,
             game_choice,
             breaktime,
             beliefInstructions,
-            controlQuestionsBelief,
+            controlQuestionBelief1,
+            controlQuestionBelief1Response,
+            controlQuestionBelief2,
+            controlQuestionBelief2Response,
+            controlQuestionBelief3,
+            controlQuestionBelief3Response,
+            //controlQuestionsBelief,
             beliefOverview,
             game_belief,
-            riskInstructions,
-            riskOverview,
-            riskSurvey,
-            ambiguityInstructions,
-            ambiguityOverview,
-            ambiguitySurvey,
+            // riskInstructions,
+            // riskOverview,
+            // riskSurvey,
+            // ambiguityInstructions,
+            // ambiguityOverview,
+            // ambiguitySurvey,
             success_guard
         ],
         on_trial_finish: function () {
@@ -1172,13 +1840,8 @@ function startExperiment() {
                 document.body.style.cursor = 'pointer'
                 jsPsych.endExperiment(`<div>
                 Thank you for your participation! You can close the browser to end the experiment now. </br>
-                Part ${finalPay[1]} was selected for payment! </br>
-                Your earnings are ${finalPay[0]} dollars. </br> 
-                <br></br>
-                We will send you ${finalPay[0]} dollars for Part ${finalPay[1]} soon! </br> 
                 We will send you the bonus payments for Part 1 or Part 2 within the next 2 weeks. </br>
-                The webcam will turn off when you close the browser. </br>
-                Your survey code is: ${makeSurveyCode('success')}${finalPay[0]*100}. </br>
+                Your survey code is: ${makeSurveyCode('success')}. </br>
                 </div>`);
             }
             if (trialcounter == 30) { 

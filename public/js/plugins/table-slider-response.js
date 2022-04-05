@@ -117,6 +117,36 @@ jsPsych.plugins['table-slider-response'] = (function() {
         default: null,
         description: 'Display type of the game matrix'
       },
+      stimulus_r: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'stimulus_r',
+        default: null,
+        description: 'Riskiness parameter of the game'
+      },
+      stimulus_r_mean: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'stimulus_r_mean',
+        default: null,
+        description: 'Mean riskiness parameter of the game'
+      },
+      stimulus_eu: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'stimulus_eu',
+        default: null,
+        description: 'Expected utility parameter of the game'
+      },
+      stimulus_n_game: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'stimulus_n_game',
+        default: null,
+        description: 'Original Game Number'
+      },
+      stimulus_n_game_r: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'stimulus_n_game_r',
+        default: null,
+        description: 'Original game number within the same mean riskiness level'
+      },
       trial_duration: {
         type: jsPsych.plugins.parameterType.INT,
         pretty_name: 'Trial duration',
@@ -277,10 +307,17 @@ jsPsych.plugins['table-slider-response'] = (function() {
       // save data
       var trialdata = {
         "stimulus": trial.stimulus,
+        "top_stimulus":trial.stimulus.slice(0,4),
+        "bottom_stimulus": trial.stimulus.slice(4),
         "rt": response.rt,
         "rating": response.response,
         "game_number": trial.stimulus_order,
         "display_order": trial.stimulus_display,
+        "game_r": trial.stimulus_r,
+        "game_r_mean": trial.stimulus_r_mean,
+        "game_eu": trial.stimulus_eu,
+        "n_game": trial.stimulus_n_game,
+        "n_game_r": trial.stimulus_n_game_r,
       };
 
       display_element.innerHTML = '';

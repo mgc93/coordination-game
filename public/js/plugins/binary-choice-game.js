@@ -54,11 +54,29 @@ jsPsych.plugins["binary-choice-game"] = (function () {
         default: null,
         description: 'Riskiness parameter of the game'
       },
+      stimulus_r_mean: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'stimulus_r_mean',
+        default: null,
+        description: 'Mean riskiness parameter of the game'
+      },
       stimulus_eu: {
         type: jsPsych.plugins.parameterType.INT,
         pretty_name: 'stimulus_eu',
         default: null,
         description: 'Expected utility parameter of the game'
+      },
+      stimulus_n_game: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'stimulus_n_game',
+        default: null,
+        description: 'Original Game Number'
+      },
+      stimulus_n_game_r: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'stimulus_n_game_r',
+        default: null,
+        description: 'Original game number within the same mean riskiness level'
       },
       doEyeTracking: {
         type: jsPsych.plugins.parameterType.BOOL,
@@ -245,7 +263,10 @@ jsPsych.plugins["binary-choice-game"] = (function () {
         "game_number": trial.stimulus_order,
         "display_order": trial.stimulus_display,
         "game_r": trial.stimulus_r,
+        "game_r_mean": trial.stimulus_r_mean,
         "game_eu": trial.stimulus_eu,
+        "n_game": trial.stimulus_n_game,
+        "n_game_r": trial.stimulus_n_game_r,
         "rt": response.rt,
         "key_press": response.key,
         "choices": trial.choices,
