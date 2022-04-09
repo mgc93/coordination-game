@@ -174,7 +174,7 @@ function uploadSubjectStatus(status) {
 
 var paymentInfo = {
     type: 'html-keyboard-response',
-    stimulus: `<div> In order to receive payment for this study, you will need to provide Venmo/Paypal or Zelle information. <br/>
+    stimulus: `<div> In order to receive payment for this study, you will need to provide Venmo or Paypal information. <br/>
                 <br><br/>
                 When you are ready, press the SPACE BAR to continue. </div>`,
     post_trial_gap: 500,
@@ -886,6 +886,18 @@ var controlQuestionChoice6Response = {
     },
     post_trial_gap: 500,
     choices: ['spacebar'],
+    on_finish: function (data) {
+        choice_quiz_data.push(data);
+        document.body.style.cursor = 'none';
+        nCorrectChoice = getAnswersChoiceQuiz(choice_quiz_data);
+        if(nCorrectChoice<4){
+            survey_code = makeSurveyCode('failed');
+            closeFullscreen();
+            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> Your survey code is: ${survey_code}${payFailQuiz1}. Thank you for signing up!`);
+            passedQuiz1 = 0;
+        }
+    }
+
 }
 
 
@@ -1233,6 +1245,17 @@ var controlQuestionBelief3Response = {
     },
     post_trial_gap: 500,
     choices: ['spacebar'],
+    on_finish: function (data) {
+        belief_quiz_data.push(data);
+        document.body.style.cursor = 'none';
+        nCorrectBelief = getAnswersBeliefQuiz(belief_quiz_data);
+        if(nCorrectBelief<2){
+            survey_code = makeSurveyCode('failed');
+            closeFullscreen();
+            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> You will receive  ${payFailQuiz2} for making it this far. Your survey code is: ${survey_code}${payFailQuiz2}. Thank you for signing up!`);
+            passedQuiz2 = 0;
+        }
+    }
 }
 
 
@@ -1798,30 +1821,30 @@ function startExperiment() {
             fullscreenEnter,
             experimentOverview,
             choiceInstructions,
-            // controlQuestionChoice1,
-            // controlQuestionChoice1Response,
-            // controlQuestionChoice2,
-            // controlQuestionChoice2Response,
-            // controlQuestionChoice3,
-            // controlQuestionChoice3Response,
-            // controlQuestionChoice4,
-            // controlQuestionChoice4Response,
-            // controlQuestionChoice5,
-            // controlQuestionChoice5Response,
-            // controlQuestionChoice6,
-            // controlQuestionChoice6Response,
-            controlQuestionsChoice,
+            controlQuestionChoice1,
+            controlQuestionChoice1Response,
+            controlQuestionChoice2,
+            controlQuestionChoice2Response,
+            controlQuestionChoice3,
+            controlQuestionChoice3Response,
+            controlQuestionChoice4,
+            controlQuestionChoice4Response,
+            controlQuestionChoice5,
+            controlQuestionChoice5Response,
+            controlQuestionChoice6,
+            controlQuestionChoice6Response,
+            //controlQuestionsChoice,
             choiceOverview,
             game_choice,
             breaktime,
             beliefInstructions,
-            // controlQuestionBelief1,
-            // controlQuestionBelief1Response,
-            // controlQuestionBelief2,
-            // controlQuestionBelief2Response,
-            // controlQuestionBelief3,
-            // controlQuestionBelief3Response,
-            controlQuestionsBelief,
+            controlQuestionBelief1,
+            controlQuestionBelief1Response,
+            controlQuestionBelief2,
+            controlQuestionBelief2Response,
+            controlQuestionBelief3,
+            controlQuestionBelief3Response,
+            //controlQuestionsBelief,
             beliefOverview,
             game_belief,
             // riskInstructions,
