@@ -893,40 +893,40 @@ var controlQuestionChoice6Response = {
 // quiz about the choice task
 
 
-// // still to finish
-// var passedQuiz1 = 1;
-// var choice_quiz_data = [];
-// var controlQuestionsChoice = {
-//     type: 'survey-multi-choice',
-//     questions: [
-//         { prompt: "Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will you earn?", name: 'Q1', options: question_choice_1_options, required: true },
-//         { prompt: "Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will they earn?", name: 'Q2', options: question_choice_2_options, required: true },
-//         { prompt: "Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will you earn?", name: 'Q3', options: question_choice_3_options, required: true },
-//         { prompt: "Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will they earn?", name: 'Q4', options: question_choice_4_options, required: true },
-//         { prompt: "Question 5: The participant with whom you are paired will be determined randomly.", name: 'Q5', options: question_choice_5_options, required: true },
-//         { prompt: "Question 6: When you make your choice, you will be able to see what the COLUMN CHOOSER has chosen.", name: 'Q6', options: question_choice_6_options, required: true }
-//     ],
-//     preamble: `<div> 
-//         <br><br/>
-//         Please answer the following questions to begin today's study. Scroll down to see all questions.</div>
-//         <br><br/>
-//         <div>Consider the following table.</div>
-//     </div>
-//     <br><br/>
-//     <img class = 'img_questions' src="img/control/control_img_1.png"></img>
-//     <br><br/>`,
-//     on_finish: function (data) {
-//         choice_quiz_data.push(data);
-//         document.body.style.cursor = 'none';
-//         nCorrectChoice = getAnswersChoiceQuiz(choice_quiz_data);
-//         if(nCorrectChoice<4){
-//             survey_code = makeSurveyCode('failed');
-//             closeFullscreen();
-//             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> You will receive ${payFailQuiz1} for making it this far. Your survey code is: ${survey_code}${payFailQuiz1}. Thank you for signing up!`);
-//             passedQuiz1 = 0;
-//         }
-//     }
-// };
+// still to finish
+var passedQuiz1 = 1;
+var choice_quiz_data = [];
+var controlQuestionsChoice = {
+    type: 'survey-multi-choice',
+    questions: [
+        { prompt: "Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will you earn?", name: 'Q1', options: question_choice_1_options, required: true },
+        { prompt: "Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will they earn?", name: 'Q2', options: question_choice_2_options, required: true },
+        { prompt: "Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will you earn?", name: 'Q3', options: question_choice_3_options, required: true },
+        { prompt: "Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will they earn?", name: 'Q4', options: question_choice_4_options, required: true },
+        { prompt: "Question 5: The participant with whom you are paired will be determined randomly.", name: 'Q5', options: question_choice_5_options, required: true },
+        { prompt: "Question 6: When you make your choice, you will be able to see what the COLUMN CHOOSER has chosen.", name: 'Q6', options: question_choice_6_options, required: true }
+    ],
+    preamble: `<div> 
+        <br><br/>
+        Please answer the following questions to begin today's study. Scroll down to see all questions.</div>
+        <br><br/>
+        <div>Consider the following table.</div>
+    </div>
+    <br><br/>
+    <img class = 'img_questions' src="img/control/control_img_1.png"></img>
+    <br><br/>`,
+    on_finish: function (data) {
+        choice_quiz_data.push(data);
+        document.body.style.cursor = 'none';
+        nCorrectChoice = getAnswersChoiceQuiz(choice_quiz_data);
+        if(nCorrectChoice<4){
+            survey_code = makeSurveyCode('failed');
+            closeFullscreen();
+            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> You will receive ${payFailQuiz1} for making it this far. Your survey code is: ${survey_code}${payFailQuiz1}. Thank you for signing up!`);
+            passedQuiz1 = 0;
+        }
+    }
+};
 
 
 
@@ -973,7 +973,7 @@ var game_choice = {
             }
         }      
     ],
-    loop_function: () => choice_count < r.length, // change this to 60 after uploading
+    loop_function: () => choice_count < 12 //r.length, // change this to 60 after uploading
 };
 
 /// break
@@ -1237,46 +1237,46 @@ var controlQuestionBelief3Response = {
 
 
 
-// // still to finish
-// var passedQuiz2 = 1;
-// var belief_quiz_data = [];
-// var controlQuestionsBelief = {
-//     type: 'survey-multi-choice',
-//     questions: [
-//         { prompt: "Question 1: Suppose you estimate that 60% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q1', options: question_belief_1_options, required: true },
-//         { prompt: "Question 2: Suppose you estimate that 87% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q2', options: question_belief_2_options, required: true },
-//         { prompt: "Question 3: You will receive your payment for this part of the experiment immediately.", name: 'Q3', options: question_belief_3_options, required: true }
-//     ],
-//     preamble: `<div> 
-//         <br><br/>
-//         Please answer the following question. </div>
-//         <div>Consider the following table.</div>
-//     </div>
-//     <br><br/>
-//     <img class = 'img_questions' src="img/control/control_img_2.png"></img>
-//     <br><br/>
-//     <div>Suppose that 80% of the participants in the study selected action L in the table above.</div>
-//     <br><br/>
-//     <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
-//     <div>
-//             <div>If your estimate is within 5% of the correct answer you earn $11</div>
-//             <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
-//             <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
-//             <div>Otherwise you earn $5</div>
-//     </div>
-//     <br><br/>`,
-//     on_finish: function (data) {
-//         belief_quiz_data.push(data);
-//         document.body.style.cursor = 'none';
-//         nCorrectBelief = getAnswersBeliefQuiz(belief_quiz_data);
-//         if(nCorrectBelief<2){
-//             survey_code = makeSurveyCode('failed');
-//             closeFullscreen();
-//             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> You will receive  ${payFailQuiz2} for making it this far. Your survey code is: ${survey_code}${payFailQuiz2}. Thank you for signing up!`);
-//             passedQuiz2 = 0;
-//         }
-//     }
-// };
+// still to finish
+var passedQuiz2 = 1;
+var belief_quiz_data = [];
+var controlQuestionsBelief = {
+    type: 'survey-multi-choice',
+    questions: [
+        { prompt: "Question 1: Suppose you estimate that 60% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q1', options: question_belief_1_options, required: true },
+        { prompt: "Question 2: Suppose you estimate that 87% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q2', options: question_belief_2_options, required: true },
+        { prompt: "Question 3: You will receive your payment for this part of the experiment immediately.", name: 'Q3', options: question_belief_3_options, required: true }
+    ],
+    preamble: `<div> 
+        <br><br/>
+        Please answer the following question. </div>
+        <div>Consider the following table.</div>
+    </div>
+    <br><br/>
+    <img class = 'img_questions' src="img/control/control_img_2.png"></img>
+    <br><br/>
+    <div>Suppose that 80% of the participants in the study selected action L in the table above.</div>
+    <br><br/>
+    <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
+    <div>
+            <div>If your estimate is within 5% of the correct answer you earn $11</div>
+            <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
+            <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
+            <div>Otherwise you earn $5</div>
+    </div>
+    <br><br/>`,
+    on_finish: function (data) {
+        belief_quiz_data.push(data);
+        document.body.style.cursor = 'none';
+        nCorrectBelief = getAnswersBeliefQuiz(belief_quiz_data);
+        if(nCorrectBelief<2){
+            survey_code = makeSurveyCode('failed');
+            closeFullscreen();
+            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> You will receive  ${payFailQuiz2} for making it this far. Your survey code is: ${survey_code}${payFailQuiz2}. Thank you for signing up!`);
+            passedQuiz2 = 0;
+        }
+    }
+};
 
 
 
@@ -1327,7 +1327,7 @@ var game_belief = {
             }
         }      
     ],
-    loop_function: () => belief_count < r.length, // change this to length of array: 105 
+    loop_function: () => belief_count < 12 //r.length, // change this to length of array: 105 
 };
 
 
@@ -1757,6 +1757,8 @@ var on_finish_callback = function () {
         browser_name: bowser.name,
         browser_type: bowser.version,
         subject: subject_id,
+        pass_quiz_1: passedQuiz1,
+        pass_quiz_2: passedQuiz2,
         interaction: jsPsych.data.getInteractionData().json(),
         windowWidth: screen.width,
         windowHight: screen.height
@@ -1796,30 +1798,30 @@ function startExperiment() {
             fullscreenEnter,
             experimentOverview,
             choiceInstructions,
-            controlQuestionChoice1,
-            controlQuestionChoice1Response,
-            controlQuestionChoice2,
-            controlQuestionChoice2Response,
-            controlQuestionChoice3,
-            controlQuestionChoice3Response,
-            controlQuestionChoice4,
-            controlQuestionChoice4Response,
-            controlQuestionChoice5,
-            controlQuestionChoice5Response,
-            controlQuestionChoice6,
-            controlQuestionChoice6Response,
-            //controlQuestionsChoice,
+            // controlQuestionChoice1,
+            // controlQuestionChoice1Response,
+            // controlQuestionChoice2,
+            // controlQuestionChoice2Response,
+            // controlQuestionChoice3,
+            // controlQuestionChoice3Response,
+            // controlQuestionChoice4,
+            // controlQuestionChoice4Response,
+            // controlQuestionChoice5,
+            // controlQuestionChoice5Response,
+            // controlQuestionChoice6,
+            // controlQuestionChoice6Response,
+            controlQuestionsChoice,
             choiceOverview,
             game_choice,
             breaktime,
             beliefInstructions,
-            controlQuestionBelief1,
-            controlQuestionBelief1Response,
-            controlQuestionBelief2,
-            controlQuestionBelief2Response,
-            controlQuestionBelief3,
-            controlQuestionBelief3Response,
-            //controlQuestionsBelief,
+            // controlQuestionBelief1,
+            // controlQuestionBelief1Response,
+            // controlQuestionBelief2,
+            // controlQuestionBelief2Response,
+            // controlQuestionBelief3,
+            // controlQuestionBelief3Response,
+            controlQuestionsBelief,
             beliefOverview,
             game_belief,
             // riskInstructions,
@@ -1837,7 +1839,7 @@ function startExperiment() {
                 document.body.style.cursor = 'pointer'
                 jsPsych.endExperiment(`<div>
                 Thank you for your participation! You can close the browser to end the experiment now. </br>
-                We will send you the bonus payments for Part 1 or Part 2 within the next 2 weeks. </br>
+                We will send you the payment for Part 1 or Part 2 within the next 2 weeks. </br>
                 Your survey code is: ${makeSurveyCode('success')}. </br>
                 </div>`);
             }
