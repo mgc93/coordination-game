@@ -898,9 +898,8 @@ var controlQuestionChoice6Response = {
     post_trial_gap: 500,
     choices: ['spacebar'],
     on_finish: function (data) {
-        choice_quiz_data.push(data);
         document.body.style.cursor = 'none';
-        nCorrectChoice = getAnswersChoiceQuiz(choice_quiz_data);
+        nCorrectChoice = getAnswersChoiceQuiz(questions_choice_data);
         if(nCorrectChoice<4){
             survey_code = makeSurveyCode('failed');
             closeFullscreen();
@@ -1257,9 +1256,8 @@ var controlQuestionBelief3Response = {
     post_trial_gap: 500,
     choices: ['spacebar'],
     on_finish: function (data) {
-        belief_quiz_data.push(data);
         document.body.style.cursor = 'none';
-        nCorrectBelief = getAnswersBeliefQuiz(belief_quiz_data);
+        nCorrectBelief = getAnswersBeliefQuiz(questions_belief_data);
         if(nCorrectBelief<2){
             survey_code = makeSurveyCode('failed');
             closeFullscreen();
