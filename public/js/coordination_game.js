@@ -412,7 +412,11 @@ function getGameMatrixTrial(choice_count, reshapedPayoff, randDisplayOrder){
 // number of correct answers for control questions - choice task
 function getAnswersChoiceQuiz(choice_quiz_data){
     var nCorrect = 0;
-    var responses = choice_quiz_data[0].responses.slice(1,choice_quiz_data[0].responses.length-1).split(',');
+    var responses = [];
+    for(var i = 0; i <choice_quiz_data.length; i++){
+        responses.push(choice_quiz_data[i].responses)
+    }
+    // var responses = choice_quiz_data[0].responses.slice(1,choice_quiz_data[0].responses.length-1).split(',');
     var correctAnswers = ["9","8","7","5","TRUE","FALSE"];
     for(var i = 0; i < responses.length; i++){
         if(responses[i].includes(correctAnswers[i])){
@@ -424,10 +428,17 @@ function getAnswersChoiceQuiz(choice_quiz_data){
     return nCorrect;
 }
 
+
+
+
 // number of correct answers for control questions - belief task
 function getAnswersBeliefQuiz(belief_quiz_data){
     var nCorrect = 0;
-    var responses = belief_quiz_data[0].responses.slice(1,belief_quiz_data[0].responses.length-1).split(',');
+    var responses = [];
+    for(var i = 0; i <belief_quiz_data.length; i++){
+        responses.push(belief_quiz_data[i].responses)
+    }
+    // var responses = belief_quiz_data[0].responses.slice(1,belief_quiz_data[0].responses.length-1).split(',');
     var correctAnswers = ["$5","$9","FALSE"];
     for(var i = 0; i < responses.length; i++){
         if(responses[i].includes(correctAnswers[i])){
