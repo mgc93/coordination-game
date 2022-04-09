@@ -113,7 +113,7 @@ downloadCSV = function (csv, filename) {
     downloadLink.click();
 };
 
-var payFailQuiz1 = '75c';
+var payFailQuiz1 = '0c';
 var payFailQuiz2 = '500c';
 
 /**************/
@@ -922,7 +922,7 @@ var controlQuestionsChoice = {
         if(nCorrectChoice<4){
             survey_code = makeSurveyCode('failed');
             closeFullscreen();
-            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> You will receive ${payFailQuiz1} for making it this far. Your survey code is: ${survey_code}${payFailQuiz1}. Thank you for signing up!`);
+            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> Your survey code is: ${survey_code}${payFailQuiz1}. Thank you for signing up!`);
             passedQuiz1 = 0;
         }
     }
