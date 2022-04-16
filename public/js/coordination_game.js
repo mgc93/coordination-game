@@ -1,18 +1,5 @@
 /** to do list */
 
-// test version
-
-// couldn't make nice border as feedback after choice :(
-// check if enough data displayed in the plugin
-// (done) exclude risk and ambiguity task
-// (done) change payment - only choices or belief task paid
-// (done) change index consent form
-// (done) make sure survey code is generated
-// test 
-// preprocess code
-// check preprocessed csv file
-// (done) change instructions
-// (done) add feedback for each control question
 
 
 // // generate payoffs
@@ -995,7 +982,7 @@ var game_choice = {
             }
         }      
     ],
-    loop_function: () => choice_count < 12 //r.length, // change this to 60 after uploading
+    loop_function: () => choice_count < r.length, // change this to 60 after uploading
 };
 
 /// break
@@ -1359,7 +1346,7 @@ var game_belief = {
             }
         }      
     ],
-    loop_function: () => belief_count < 12 //r.length, // change this to length of array: 105 
+    loop_function: () => belief_count < r.length, // change this to length of array: 105 
 };
 
 
