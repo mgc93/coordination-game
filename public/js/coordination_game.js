@@ -49,25 +49,25 @@
 // var eu = design[2];
 
 var A = [
-    9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00, 9.00
+    200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200
 ];
 
 var B = [
-    5.04, 5.60, 5.90, 6.56, 6.86, 7.22, 7.80, 8.04, 8.52, 8.62, 5.14, 5.46, 6.10, 6.32, 6.68, 7.38, 7.50, 8.06, 8.54, 8.66, 5.34, 5.48, 5.82, 6.48, 6.88, 7.14, 7.68, 8.02, 8.54, 8.74, 6.66, 7.12, 7.24, 7.60, 7.82, 8.16, 8.06, 8.50, 8.60, 8.88, 7.88, 8.10, 8.08, 8.30, 8.28, 8.54, 8.56, 8.74, 8.84, 8.92, 8.44, 8.48, 8.60, 8.70, 8.72, 8.74, 8.80, 8.90, 8.92, 8.98, 8.82, 8.92, 8.98, 8.94, 8.94, 8.96, 8.98, 8.94, 8.98, 8.98
+    5,  23,  47,  69,  83, 105, 137, 144, 166, 184,  17,  23,  44,  76,  91, 119, 130, 157, 175, 184,  17,  21,  45,  61,  97, 117, 127, 146, 165, 186,  94, 121, 129, 144, 137, 159, 160, 177, 187, 195, 157, 162, 157, 161, 175, 180, 183, 181, 192, 195, 176, 172, 177, 187, 187, 190, 189, 193, 197, 198, 194, 198, 193, 198, 194, 197, 197, 197, 199, 199
 ];
 
 var C = [
-    6.90, 6.80, 6.94, 6.76, 6.86, 6.90, 6.90, 6.94, 6.98, 6.98, 6.18, 5.94, 6.16, 6.38, 6.54, 6.54, 6.68, 6.74, 6.90, 6.94, 5.14, 5.18, 5.32, 5.36, 5.74, 5.86, 6.40, 6.54, 6.76, 6.88, 5.00, 5.26, 5.42, 5.72, 5.88, 6.10, 6.22, 6.46, 6.62, 6.90, 5.12, 5.32, 5.44, 5.66, 5.84, 6.04, 6.34, 6.60, 6.72, 6.84, 5.14, 5.40, 5.52, 5.70, 5.86, 6.14, 6.40, 6.56, 6.66, 6.94, 5.04, 5.22, 5.52, 5.76, 5.90, 6.18, 6.28, 6.44, 6.76, 6.82
+    80, 96, 89, 89, 93, 91, 97, 97, 98, 99, 57, 44, 69, 63, 73, 78, 83, 92, 93, 95, 13, 22, 16, 11, 51, 64, 56, 75, 82, 94,  3, 20, 30, 33, 41, 57, 63, 75, 89, 95,  0, 20, 25, 40, 46, 54, 69, 71, 83, 92,  1, 13, 28, 36, 42, 53, 62, 76, 83, 93,  9, 11, 21, 33, 41, 51, 70, 72, 81, 91
 ];
 
 var D = [
-    7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00, 7.00
+    100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100
 ];
 
 var payoff = [A, A, C, B, B, C, D, D];
 
 var r = [
-    0.02463054, 0.05555556, 0.01898734, 0.08955224, 0.06140351, 0.05319149, 0.07692308, 0.05882353, 0.04000000, 0.05000000, 0.17521368, 0.23043478, 0.22459893, 0.18787879, 0.16546763, 0.22115385, 0.17582418, 0.21666667, 0.17857143, 0.15000000, 0.33695652, 0.34082397, 0.34567901, 0.39423077, 0.37278107, 0.38000000, 0.31250000, 0.31944444, 0.34285714, 0.31578947, 0.46082949, 0.48066298, 0.47305389, 0.47761194, 0.48695652, 0.51724138, 0.45348837, 0.51923077, 0.48717949, 0.45454545, 0.62666667, 0.65116279, 0.62903226, 0.65686275, 0.61702128, 0.67605634, 0.60000000, 0.60606061, 0.63636364, 0.66666667, 0.76859504, 0.75471698, 0.78723404, 0.81250000, 0.80281690, 0.76785714, 0.75000000, 0.81481481, 0.80952381, 0.75000000, 0.91588785, 0.95698925, 0.98666667, 0.95384615, 0.94827586, 0.95348837, 0.97297297, 0.90322581, 0.92307692, 0.90000000
+    0.09302326, 0.02209945, 0.06707317, 0.07746479, 0.05645161, 0.08653846, 0.04545455, 0.05084746, 0.05555556, 0.05882353, 0.19026549, 0.24034335, 0.16577540, 0.22981366, 0.19852941, 0.21359223, 0.19540230, 0.15686275, 0.21875000, 0.23809524, 0.32222222, 0.30350195, 0.35146444, 0.39035088, 0.32236842, 0.30252101, 0.37606838, 0.31645570, 0.33962264, 0.30000000, 0.47783251, 0.50314465, 0.49645390, 0.54471545, 0.48360656, 0.51190476, 0.48051948, 0.52083333, 0.45833333, 0.50000000, 0.69930070, 0.67796610, 0.63559322, 0.60606061, 0.68354430, 0.69696970, 0.64583333, 0.60416667, 0.68000000, 0.61538462, 0.80487805, 0.75652174, 0.75789474, 0.83116883, 0.81690141, 0.82456140, 0.77551020, 0.77419355, 0.85000000, 0.77777778, 0.93814433, 0.97802198, 0.91860465, 0.97101449, 0.90769231, 0.94230769, 0.90909091, 0.90322581, 0.95000000, 0.90000000
 ];
 
 var r_mean = [
@@ -75,7 +75,7 @@ var r_mean = [
 ];
 
 var eu = [
-    6.951724, 6.922222, 6.979114, 6.960597, 6.991404, 7.011702, 7.061538, 7.061176, 7.060800, 7.081000, 6.674103, 6.645130, 6.797861, 6.872242, 6.947050, 7.084038, 7.087912, 7.229667, 7.275000, 7.249000, 6.440652, 6.481948, 6.592099, 6.795000, 6.955266, 7.053200, 7.212500, 7.325833, 7.528000, 7.549474, 6.843318, 7.057680, 7.113533, 7.286567, 7.399304, 7.600000, 7.480698, 7.778846, 7.779487, 7.854545, 7.551467, 7.716279, 7.679355, 7.853922, 7.789787, 8.041127, 7.936000, 8.054545, 8.170909, 8.280000, 8.106777, 8.116981, 8.259574, 8.381250, 8.380845, 8.336071, 8.350000, 8.548148, 8.554286, 8.485000, 8.666916, 8.837419, 8.953600, 8.850462, 8.839655, 8.868837, 8.926486, 8.752258, 8.827692, 8.782000
+    91.16279,  98.29834,  96.44512,  97.59859,  99.04032, 100.43269, 101.68182, 102.23729, 103.66667, 104.94118,  84.20796,  81.49356,  90.71658,  94.48447,  98.21324, 104.05825, 105.86207, 108.94118, 116.40625, 120.00000,  73.25556,  76.02335,  80.66946,  84.77632,  99.03289, 105.14286, 110.15385, 114.55696, 122.07547, 125.80000,  97.13300, 110.56604, 114.39716, 123.96748, 117.89344, 130.20238, 128.83117, 140.10417, 139.87500, 147.50000, 139.86014, 142.03390, 136.22881, 136.96970, 151.26582, 155.75758, 153.60417, 148.93750, 162.56000, 158.46154, 161.17073, 154.46957, 158.35789, 172.31169, 171.07042, 174.21053, 169.02041, 172.00000, 182.45000, 176.22222, 188.18557, 195.84615, 185.43023, 195.15942, 185.32308, 191.40385, 188.18182, 187.61290, 194.05000, 189.10000
 ];
 
 var n_game_r = [
@@ -370,25 +370,25 @@ function getGameMatrixTrial(choice_count, reshapedPayoff, randDisplayOrder){
         case 0:
             var orderPayoffs = [1, 2, 3, 4, 5, 6, 7, 8]
             for (var i = 0; i < 8; i++){
-                gameMatrix.push(parseFloat(reshapedPayoff[orderPayoffs[i]-1][choice_count]).toFixed(2))
+                gameMatrix.push(parseFloat(reshapedPayoff[orderPayoffs[i]-1][choice_count]).toFixed(0))
             }
             break;
         case 1:
             var orderPayoffs = [5, 6, 7, 8, 1, 2, 3, 4]
             for (var i = 0; i < 8; i++){
-                gameMatrix.push(parseFloat(reshapedPayoff[orderPayoffs[i]-1][choice_count]).toFixed(2))
+                gameMatrix.push(parseFloat(reshapedPayoff[orderPayoffs[i]-1][choice_count]).toFixed(0))
             }
             break;
         case 2:
             var orderPayoffs = [7, 8, 5, 6, 3, 4, 1, 2]
             for (var i = 0; i < 8; i++){
-                gameMatrix.push(parseFloat(reshapedPayoff[orderPayoffs[i]-1][choice_count]).toFixed(2))
+                gameMatrix.push(parseFloat(reshapedPayoff[orderPayoffs[i]-1][choice_count]).toFixed(0))
             }
             break;
         case 3:
             var orderPayoffs = [3, 4, 1, 2, 7, 8, 5, 6]
             for (var i = 0; i < 8; i++){
-                gameMatrix.push(parseFloat(reshapedPayoff[orderPayoffs[i]-1][choice_count]).toFixed(2))
+                gameMatrix.push(parseFloat(reshapedPayoff[orderPayoffs[i]-1][choice_count]).toFixed(0))
             }
             break;
       }
@@ -404,7 +404,7 @@ function getAnswersChoiceQuiz(choice_quiz_data){
         responses.push(choice_quiz_data[i].responses)
     }
     // var responses = choice_quiz_data[0].responses.slice(1,choice_quiz_data[0].responses.length-1).split(',');
-    var correctAnswers = ["9","8","7","5","TRUE","FALSE"];
+    var correctAnswers = ["200","150","100","0","TRUE","FALSE"];
     for(var i = 0; i < responses.length; i++){
         if(responses[i].includes(correctAnswers[i])){
             nCorrect = nCorrect + 1;
@@ -472,22 +472,22 @@ var choiceInstructions = {
 }
 
 // quiz about the choice task with feedback
-var question_choice_1_options = ["5",
-                        "7",
-                        "8",
-                        "9"];
-var question_choice_2_options = ["6",
-                        "7",
-                        "8",
-                        "9"];
-var question_choice_3_options = ["5",
-                        "6",
-                        "7",
-                        "8"];
-var question_choice_4_options = ["5",
-                        "6",
-                        "7",
-                        "8"];
+var question_choice_1_options = ["0",
+                        "100",
+                        "150",
+                        "200"];
+var question_choice_2_options = ["50",
+                        "100",
+                        "150",
+                        "200"];
+var question_choice_3_options = ["0",
+                        "50",
+                        "100",
+                        "150"];
+var question_choice_4_options = ["0",
+                        "50",
+                        "100",
+                        "150"];
 var question_choice_5_options = ["TRUE",
                         "FALSE"];
 var question_choice_6_options = ["TRUE",
@@ -507,7 +507,7 @@ var feedback_question_choice_6 = [];
 var controlQuestionChoice1 = {
     type: 'survey-multi-choice',
     questions: [
-        { prompt: "Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will you earn?", name: 'Q1', options: question_choice_1_options, required: true },
+        { prompt: "Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many points will you earn?", name: 'Q1', options: question_choice_1_options, required: true },
     ],
     preamble: `<div> 
         <br><br/>
@@ -520,7 +520,7 @@ var controlQuestionChoice1 = {
     <br><br/>`,
     on_finish: function (data) {
         questions_choice_data.push(data);
-        if(data.responses.includes("9")){
+        if(data.responses.includes("200")){
             data.correct = true; // can add property correct by modify data object directly
           } else {
             data.correct = false;
@@ -543,24 +543,24 @@ var controlQuestionChoice1Response = {
           return `
           <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
           <br><br/> 
-          <div>Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will you earn?</div>
+          <div>Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many points will you earn?</div>
           <br><br/> 
           <br><br/>
           <img class = 'img_questions' src="img/control/control_img_1.png"></img>
           <br><br/>
             <br><br/>
-            5 <br>
-            7 <br>
-            8 <br>
-            9 <br>
+            0 <br>
+            100 <br>
+            150 <br>
+            200 <br>
             <br><br/>
-            The correct answer is: <font color = 'green';> 9 </font>.
+            The correct answer is: <font color = 'green';> 200 </font>.
             <br><br/>
             If the COLUMN CHOOSER selects the column L and you select the row T, then you end up in the UPPER-LEFT cell of the table.
             <br><br/>
             Your payoff is represented in GREEN.<br>
             The COLUMN CHOOSER'S payoff is represented in RED. <br>
-            Therefore, you will earn <font color = 'green';> 9 </font> dollars. 
+            Therefore, you will earn <font color = 'green';> 200 </font> points. 
             <br><br/>
           When you are ready, press the  <b>SPACE BAR</b> to continue. 
           <br><br/> 
@@ -575,7 +575,7 @@ var controlQuestionChoice1Response = {
 var controlQuestionChoice2 = {
     type: 'survey-multi-choice',
     questions: [
-        { prompt: "Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will they earn?", name: 'Q2', options: question_choice_2_options, required: true },
+        { prompt: "Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many points will they earn?", name: 'Q2', options: question_choice_2_options, required: true },
     ],
     preamble: `<div> 
         <br><br/>
@@ -588,7 +588,7 @@ var controlQuestionChoice2 = {
     <br><br/>`,
     on_finish: function (data) {
         questions_choice_data.push(data);
-        if(data.responses.includes("8")){
+        if(data.responses.includes("150")){
             data.correct = true; // can add property correct by modify data object directly
           } else {
             data.correct = false;
@@ -611,24 +611,24 @@ var controlQuestionChoice2Response = {
           return `
           <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
           <br><br/> 
-          <div>Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will they earn?</div>
+          <div>Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many points will they earn?</div>
           <br><br/> 
           <br><br/>
           <img class = 'img_questions' src="img/control/control_img_1.png"></img>
           <br><br/>
             <br><br/>
-            6 <br>
-            7 <br>
-            8 <br>
-            9 <br>
+            50 <br>
+            100 <br>
+            150 <br>
+            200 <br>
             <br><br/>
-            The correct answer is: <font color = 'green';> 8 </font>.
+            The correct answer is: <font color = 'green';> 150 </font>.
             <br><br/>
             If the COLUMN CHOOSER selects the column L and you select the row T, then you end up in the UPPER-LEFT cell of the table.
             <br><br/>
             Your payoff is represented in GREEN.<br>
             The COLUMN CHOOSER'S payoff is represented in RED. <br>
-            Therefore, they will earn <font color = 'green';> 8 </font> dollars. 
+            Therefore, they will earn <font color = 'green';> 150 </font> points. 
             <br><br/>
           When you are ready, press the  <b>SPACE BAR</b> to continue. 
           <br><br/> 
@@ -643,7 +643,7 @@ var controlQuestionChoice2Response = {
 var controlQuestionChoice3 = {
     type: 'survey-multi-choice',
     questions: [
-        { prompt: "Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will you earn?", name: 'Q3', options: question_choice_3_options, required: true },
+        { prompt: "Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many points will you earn?", name: 'Q3', options: question_choice_3_options, required: true },
     ],
     preamble: `<div> 
         <br><br/>
@@ -656,7 +656,7 @@ var controlQuestionChoice3 = {
     <br><br/>`,
     on_finish: function (data) {
         questions_choice_data.push(data);
-        if(data.responses.includes("7")){
+        if(data.responses.includes("100")){
             data.correct = true; // can add property correct by modify data object directly
           } else {
             data.correct = false;
@@ -679,24 +679,24 @@ var controlQuestionChoice3Response = {
           return `
           <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
           <br><br/> 
-          <div>Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will you earn?</div>
+          <div>Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many points will you earn?</div>
           <br><br/> 
           <br><br/>
           <img class = 'img_questions' src="img/control/control_img_1.png"></img>
           <br><br/>
             <br><br/>
-            5 <br>
-            7 <br>
-            8 <br>
-            9 <br>
+            0 <br>
+            100 <br>
+            150 <br>
+            200 <br>
             <br><br/>
-            The correct answer is: <font color = 'green';> 7 </font>.
+            The correct answer is: <font color = 'green';> 100 </font>.
             <br><br/>
             If the COLUMN CHOOSER selects the column L and you select the row B, then you end up in the LOWER-LEFT cell of the table.
             <br><br/>
             Your payoff is represented in GREEN.<br>
             The COLUMN CHOOSER'S payoff is represented in RED. <br>
-            Therefore, you will earn <font color = 'green';> 7 </font> dollars. 
+            Therefore, you will earn <font color = 'green';> 100 </font> points. 
             <br><br/>
           When you are ready, press the  <b>SPACE BAR</b> to continue. 
           <br><br/> 
@@ -711,7 +711,7 @@ var controlQuestionChoice3Response = {
 var controlQuestionChoice4 = {
     type: 'survey-multi-choice',
     questions: [
-        { prompt: "Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will they earn?", name: 'Q4', options: question_choice_4_options, required: true },
+        { prompt: "Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many points will they earn?", name: 'Q4', options: question_choice_4_options, required: true },
     ],
     preamble: `<div> 
         <br><br/>
@@ -724,7 +724,7 @@ var controlQuestionChoice4 = {
     <br><br/>`,
     on_finish: function (data) {
         questions_choice_data.push(data);
-        if(data.responses.includes("5")){
+        if(data.responses.includes(`"0`)){
             data.correct = true; // can add property correct by modify data object directly
           } else {
             data.correct = false;
@@ -747,24 +747,24 @@ var controlQuestionChoice4Response = {
           return `
           <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
           <br><br/> 
-          <div>Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will they earn?</div>
+          <div>Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many points will they earn?</div>
           <br><br/> 
           <br><br/>
           <img class = 'img_questions' src="img/control/control_img_1.png"></img>
           <br><br/>
             <br><br/>
-            5 <br>
-            7 <br>
-            8 <br>
-            9 <br>
+            0 <br>
+            100 <br>
+            150 <br>
+            200 <br>
             <br><br/>
-            The correct answer is: <font color = 'green';> 5 </font>.
+            The correct answer is: <font color = 'green';> 0 </font>.
             <br><br/>
             If the COLUMN CHOOSER selects the column L and you select the row B, then you end up in the LOWER-LEFT cell of the table.
             <br><br/>
             Your payoff is represented in GREEN.<br>
             The COLUMN CHOOSER'S payoff is represented in RED. <br>
-            Therefore, you will earn <font color = 'green';> 5 </font> dollars. 
+            Therefore, you will earn <font color = 'green';> 0 </font> points. 
             <br><br/>
           When you are ready, press the  <b>SPACE BAR</b> to continue. 
           <br><br/> 
@@ -908,10 +908,10 @@ var choice_quiz_data = [];
 var controlQuestionsChoice = {
     type: 'survey-multi-choice',
     questions: [
-        { prompt: "Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will you earn?", name: 'Q1', options: question_choice_1_options, required: true },
-        { prompt: "Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many dollars will they earn?", name: 'Q2', options: question_choice_2_options, required: true },
-        { prompt: "Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will you earn?", name: 'Q3', options: question_choice_3_options, required: true },
-        { prompt: "Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many dollars will they earn?", name: 'Q4', options: question_choice_4_options, required: true },
+        { prompt: "Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many points will you earn?", name: 'Q1', options: question_choice_1_options, required: true },
+        { prompt: "Question 2: If the COLUMN CHOOSER selects the column L and you select the row T, how many points will they earn?", name: 'Q2', options: question_choice_2_options, required: true },
+        { prompt: "Question 3: If the COLUMN CHOOSER selects the column L and you select the row B, how many points will you earn?", name: 'Q3', options: question_choice_3_options, required: true },
+        { prompt: "Question 4: If the COLUMN CHOOSER selects the column L and you select the row B, how many points will they earn?", name: 'Q4', options: question_choice_4_options, required: true },
         { prompt: "Question 5: The participant with whom you are paired will be determined randomly.", name: 'Q5', options: question_choice_5_options, required: true },
         { prompt: "Question 6: When you make your choice, you will be able to see what the COLUMN CHOOSER has chosen.", name: 'Q6', options: question_choice_6_options, required: true }
     ],
@@ -982,7 +982,7 @@ var game_choice = {
             }
         }      
     ],
-    loop_function: () => choice_count < r.length, // change this to 60 after uploading
+    loop_function: () => choice_count < 10//r.length, // change this to 60 after uploading
 };
 
 /// break
@@ -1008,14 +1008,14 @@ var beliefInstructions = {
 }
 
 // quiz about the belief task
-var question_belief_1_options = ["$11",
-                        "$9",
-                        "$7",
-                        "$5"];
-var question_belief_2_options = ["$11",
-                        "$9",
-                        "$7",
-                        "$5"];
+var question_belief_1_options = ["$8",
+                        "$6",
+                        "$4",
+                        "$2"];
+var question_belief_2_options = ["$8",
+                        "$6",
+                        "$4",
+                        "$2"];
 var question_belief_3_options = ["TRUE",
                          "FALSE"];
 
@@ -1043,15 +1043,15 @@ var controlQuestionBelief1 = {
     <br><br/>
     <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
     <div>
-            <div>If your estimate is within 5% of the correct answer you earn $11</div>
-            <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
-            <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
-            <div>Otherwise you earn $5</div>
+            <div>If your estimate is within 5% of the correct answer you earn $8</div>
+            <div>If your estimate is between 5% and 10% of the correct answer you earn $6</div>
+            <div>If your estimate is between 10% and 15% of the correct answer you earn $4</div>
+            <div>Otherwise you earn $2</div>
     </div>
     <br><br/>`,
     on_finish: function (data) {
         questions_belief_data.push(data);
-        if(data.responses.includes("$5")){
+        if(data.responses.includes("$2")){
             data.correct = true; // can add property correct by modify data object directly
         } else {
             data.correct = false;
@@ -1081,22 +1081,22 @@ var controlQuestionBelief1Response = {
         <br><br/>
         <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
         <div>
-                <div>If your estimate is within 5% of the correct answer you earn $11</div>
-                <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
-                <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
-                <div>Otherwise you earn $5</div>
+                <div>If your estimate is within 5% of the correct answer you earn $8</div>
+                <div>If your estimate is between 5% and 10% of the correct answer you earn $6</div>
+                <div>If your estimate is between 10% and 15% of the correct answer you earn $4</div>
+                <div>Otherwise you earn $2</div>
         </div>
             <br><br/>
-            $11 <br>
-            $9 <br>
-            $7 <br>
-            $5 <br>
+            $8 <br>
+            $6 <br>
+            $4 <br>
+            $2 <br>
             <br><br/>
-            The correct answer is: <font color = 'green';> $5 </font>.
+            The correct answer is: <font color = 'green';> $2 </font>.
             <br><br/>
             The error in your estimate is |80% - 60%| = 20%.
             <br><br/>
-            Therefore, you earn <font color = 'green';> $5 </font>. 
+            Therefore, you earn <font color = 'green';> $2 </font>. 
             <br><br/>
         When you are ready, press the  <b>SPACE BAR</b> to continue. 
         <br><br/> 
@@ -1126,15 +1126,15 @@ var controlQuestionBelief2 = {
     <br><br/>
     <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
     <div>
-            <div>If your estimate is within 5% of the correct answer you earn $11</div>
-            <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
-            <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
-            <div>Otherwise you earn $5</div>
+            <div>If your estimate is within 5% of the correct answer you earn $8</div>
+            <div>If your estimate is between 5% and 10% of the correct answer you earn $6</div>
+            <div>If your estimate is between 10% and 15% of the correct answer you earn $4</div>
+            <div>Otherwise you earn $2</div>
     </div>
     <br><br/>`,
     on_finish: function (data) {
         questions_belief_data.push(data);
-        if(data.responses.includes("$9")){
+        if(data.responses.includes("$6")){
             data.correct = true; // can add property correct by modify data object directly
         } else {
             data.correct = false;
@@ -1164,22 +1164,22 @@ var controlQuestionBelief2Response = {
         <br><br/>
         <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
         <div>
-                <div>If your estimate is within 5% of the correct answer you earn $11</div>
-                <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
-                <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
-                <div>Otherwise you earn $5</div>
+                <div>If your estimate is within 5% of the correct answer you earn $8</div>
+                <div>If your estimate is between 5% and 10% of the correct answer you earn $6</div>
+                <div>If your estimate is between 10% and 15% of the correct answer you earn $4</div>
+                <div>Otherwise you earn $2</div>
         </div>
             <br><br/>
-            $11 <br>
-            $9 <br>
-            $7 <br>
-            $5 <br>
+            $8 <br>
+            $6 <br>
+            $4 <br>
+            $2 <br>
             <br><br/>
-            The correct answer is: <font color = 'green';> $9 </font>.
+            The correct answer is: <font color = 'green';> $6 </font>.
             <br><br/>
             The error in your estimate is |80% - 87%| = 7%.
             <br><br/>
-            Therefore, you earn <font color = 'green';> $9 </font>. 
+            Therefore, you earn <font color = 'green';> $6 </font>. 
             <br><br/>
         When you are ready, press the  <b>SPACE BAR</b> to continue. 
         <br><br/> 
@@ -1278,10 +1278,10 @@ var controlQuestionsBelief = {
     <br><br/>
     <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
     <div>
-            <div>If your estimate is within 5% of the correct answer you earn $11</div>
-            <div>If your estimate is between 5% and 10% of the correct answer you earn $9</div>
-            <div>If your estimate is between 10% and 15% of the correct answer you earn $7</div>
-            <div>Otherwise you earn $5</div>
+            <div>If your estimate is within 5% of the correct answer you earn $8</div>
+            <div>If your estimate is between 5% and 10% of the correct answer you earn $6</div>
+            <div>If your estimate is between 10% and 15% of the correct answer you earn $4</div>
+            <div>Otherwise you earn $2</div>
     </div>
     <br><br/>`,
     on_finish: function (data) {
@@ -1346,7 +1346,7 @@ var game_belief = {
             }
         }      
     ],
-    loop_function: () => belief_count < r.length, // change this to length of array: 105 
+    loop_function: () => belief_count < 10 //r.length, // change this to length of array: 105 
 };
 
 
@@ -1810,10 +1810,10 @@ var trialcounter;
 function startExperiment() {
     jsPsych.init({
         timeline: [
-            paymentInfo,
-            paymentQuestion,
-            personalInfoQuestion,
-            surveyQuestion,
+            // paymentInfo,
+            // paymentQuestion,
+            // personalInfoQuestion,
+            // surveyQuestion,
             fullscreenEnter,
             experimentOverview,
             choiceInstructions,
