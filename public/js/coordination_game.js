@@ -1810,10 +1810,10 @@ var trialcounter;
 function startExperiment() {
     jsPsych.init({
         timeline: [
-            // paymentInfo,
-            // paymentQuestion,
-            // personalInfoQuestion,
-            // surveyQuestion,
+            paymentInfo,
+            paymentQuestion,
+            personalInfoQuestion,
+            surveyQuestion,
             fullscreenEnter,
             experimentOverview,
             choiceInstructions,
