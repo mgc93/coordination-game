@@ -982,7 +982,7 @@ var game_choice = {
             }
         }      
     ],
-    loop_function: () => choice_count < 5//r.length, // change this to 60 after uploading
+    loop_function: () => choice_count < r.length, // change this to 60 after uploading
 };
 
 /// break
@@ -1346,7 +1346,7 @@ var game_belief = {
             }
         }      
     ],
-    loop_function: () => belief_count < 5 //r.length, // change this to length of array: 105 
+    loop_function: () => belief_count < r.length, // change this to length of array: 105 
 };
 
 
