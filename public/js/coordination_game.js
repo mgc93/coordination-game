@@ -404,7 +404,7 @@ function getAnswersChoiceQuiz(choice_quiz_data){
         responses.push(choice_quiz_data[i].responses)
     }
     // var responses = choice_quiz_data[0].responses.slice(1,choice_quiz_data[0].responses.length-1).split(',');
-    var correctAnswers = ["200","150","100","0","TRUE","FALSE"];
+    var correctAnswers = ["200","150","100",`"0`,"TRUE","FALSE"];
     for(var i = 0; i < responses.length; i++){
         if(responses[i].includes(correctAnswers[i])){
             nCorrect = nCorrect + 1;
@@ -426,7 +426,7 @@ function getAnswersBeliefQuiz(belief_quiz_data){
         responses.push(belief_quiz_data[i].responses)
     }
     // var responses = belief_quiz_data[0].responses.slice(1,belief_quiz_data[0].responses.length-1).split(',');
-    var correctAnswers = ["$5","$9","FALSE"];
+    var correctAnswers = ["$2","$6","FALSE"];
     for(var i = 0; i < responses.length; i++){
         if(responses[i].includes(correctAnswers[i])){
             nCorrect = nCorrect + 1;
@@ -982,7 +982,7 @@ var game_choice = {
             }
         }      
     ],
-    loop_function: () => choice_count < 10//r.length, // change this to 60 after uploading
+    loop_function: () => choice_count < 5//r.length, // change this to 60 after uploading
 };
 
 /// break
@@ -1346,7 +1346,7 @@ var game_belief = {
             }
         }      
     ],
-    loop_function: () => belief_count < 10 //r.length, // change this to length of array: 105 
+    loop_function: () => belief_count < 5 //r.length, // change this to length of array: 105 
 };
 
 
