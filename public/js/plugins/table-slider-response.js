@@ -123,9 +123,9 @@ jsPsych.plugins['table-slider-response'] = (function() {
         default: null,
         description: 'Riskiness parameter of the game'
       },
-      stimulus_r_mean: {
+      stimulus_type_game: {
         type: jsPsych.plugins.parameterType.INT,
-        pretty_name: 'stimulus_r_mean',
+        pretty_name: 'stimulus_type_game',
         default: null,
         description: 'Mean riskiness parameter of the game'
       },
@@ -314,7 +314,7 @@ jsPsych.plugins['table-slider-response'] = (function() {
         "game_number": trial.stimulus_order,
         "display_order": trial.stimulus_display,
         "game_r": trial.stimulus_r,
-        "game_r_mean": trial.stimulus_r_mean,
+        "game_type_game": trial.stimulus_type_game,
         "game_eu": trial.stimulus_eu,
         "n_game": trial.stimulus_n_game,
         "n_game_r": trial.stimulus_n_game_r,
