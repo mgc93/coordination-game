@@ -367,7 +367,8 @@ function getRandDisplayChoice(n){
     return selectedrandDisplayOrder
 }
 
-var randDisplayOrderChoice = getRandDisplayChoice(n);
+//var randDisplayOrderChoice = getRandDisplayChoice(n);
+var randDisplayOrderChoice = Array(n).fill([0]).flat();
 
 // randomize display of each action - choice phase
 function getRandDisplayBelief(randDisplayOrderChoice,randIndChoice,randIndBelief){
