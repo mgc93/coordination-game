@@ -1,5 +1,7 @@
 /** to do list */
-
+// replace payoffs
+// change color of actions
+// add highligh for chosen option
 
 
 // // generate payoffs
