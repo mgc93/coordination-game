@@ -178,13 +178,13 @@ jsPsych.plugins["binary-choice-game"] = (function () {
       if (jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(response.key) == trial.choices[0]) {
         display_element.querySelector('.row-1').className += '-responded';
         display_element.querySelector('.row-2').className += '-responded';
-        var selected = '#multiattribute-choices-stimulus-left';
+        //var selected = '#multiattribute-choices-stimulus-left';
       } else if(jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(response.key) == trial.choices[1]) {
         display_element.querySelector('.row-3').className += '-responded';
         display_element.querySelector('.row-4').className += '-responded';
-        var selected = '#multiattribute-choices-stimulus-right';
+        //var selected = '#multiattribute-choices-stimulus-right';
       }
-      $(selected).css('border', `6px solid ${selected_color}`);
+      //$(selected).css('border', `6px solid ${selected_color}`);
     };
 
     var display_timeout = function () {

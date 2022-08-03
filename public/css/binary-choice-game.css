@@ -117,7 +117,7 @@ transform: translate(-50%, -50%);
   padding-right: 5vh;
 }
 
-/* .row-1-responded{
+.row-1-responded{
   border-top: 7px solid white;
   border-left: 7px solid white;
   border-right: 7px solid white;
@@ -139,4 +139,20 @@ transform: translate(-50%, -50%);
   border-bottom: 7px solid white;
   border-left: 7px solid white;
   border-right: 7px solid white;
-} */
+} 
+
+#action-self-top{
+  color: #32cb00;
+}
+
+#action-self-bottom{
+  color: #32cb00;
+}
+
+#action-other-left{
+  color: #fe0000;
+}
+
+#action-other-right{
+  color: #fe0000;
+}
