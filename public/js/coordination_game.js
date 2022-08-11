@@ -959,7 +959,7 @@ var controlQuestionChoice6Response = {
             closeFullscreen();
             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.</br> 
             <br><br/>
-            Your survey code is: ${survey_code}${payFailQuiz1}. <br/>
+            Your survey code is: ${survey_code}. <br/>
             Make sure you copy this code in order to get paid!
             <br><br/>
             Thank you for signing up!`);
@@ -1282,7 +1282,7 @@ var controlQuestionBelief3Response = {
             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> 
             You will receive  ${payFailQuiz2} for making it this far. </br>
             <br><br/>
-            Your survey code is: ${survey_code}${payFailQuiz2}. <br/>
+            Your survey code is: ${survey_code}. <br/>
             Make sure you copy this code in order to get paid!
             <br><br/>
             Thank you for signing up!`);
@@ -1868,29 +1868,29 @@ function startExperiment() {
             // fullscreenEnter,
             // experimentOverview,
             // choiceInstructions,
-            // controlQuestionChoice1,
-            // controlQuestionChoice1Response,
-            // controlQuestionChoice2,
-            // controlQuestionChoice2Response,
-            // controlQuestionChoice3,
-            // controlQuestionChoice3Response,
-            // controlQuestionChoice4,
-            // controlQuestionChoice4Response,
-            // controlQuestionChoice5,
-            // controlQuestionChoice5Response,
-            // controlQuestionChoice6,
-            // controlQuestionChoice6Response,
+            controlQuestionChoice1,
+            controlQuestionChoice1Response,
+            controlQuestionChoice2,
+            controlQuestionChoice2Response,
+            controlQuestionChoice3,
+            controlQuestionChoice3Response,
+            controlQuestionChoice4,
+            controlQuestionChoice4Response,
+            controlQuestionChoice5,
+            controlQuestionChoice5Response,
+            controlQuestionChoice6,
+            controlQuestionChoice6Response,
                 //controlQuestionsChoice,
             // choiceOverview,
             // game_choice,
             // breaktime,
             // beliefInstructions,
-            controlQuestionBelief1,
-            controlQuestionBelief1Response,
-            controlQuestionBelief2,
-            controlQuestionBelief2Response,
-            controlQuestionBelief3,
-            controlQuestionBelief3Response,
+            // controlQuestionBelief1,
+            // controlQuestionBelief1Response,
+            // controlQuestionBelief2,
+            // controlQuestionBelief2Response,
+            // controlQuestionBelief3,
+            // controlQuestionBelief3Response,
                 //controlQuestionsBelief,
             // beliefOverview,
             // game_belief,
