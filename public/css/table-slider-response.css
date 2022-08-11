@@ -106,6 +106,20 @@
     .tb .tb-baqh-other #action-other-left {
       color: #0080ff;
     }
+
+    .tb .tb-baqh-other #action-other-right {
+      color: white;
+    }
+
+    .tb .container-multi-choice-column .action-self #action-self-top{
+      color: white;
+    }
+
+    .tb .container-multi-choice-column .action-self #action-self-bottom{
+      color: white;
+    }
+
+
     /* .tg .tg-baqh-self  {
       text-align:center;
       vertical-align:center;
