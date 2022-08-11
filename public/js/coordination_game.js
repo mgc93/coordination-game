@@ -1004,6 +1004,8 @@ var choiceOverview = {
             To select the bottom row of the table, press  the <b><font color='green'>DOWN</font></b> key. <br/>
             After each choice, look at the red circle at the center of the screen.  <br/>
             <br><br/>
+            You will make a total of <font size=105%; font color = 'white';>72 </font>decision in this part. <br/>
+            <br><br/>
             When you are ready, press the  <b>SPACE BAR</b> to continue.  </div>`,
     choices: ['spacebar'],
     post_trial_gap: 500
@@ -1320,6 +1322,8 @@ var beliefOverview = {
             You can make your response by clicking on the slider bar. <br/>
             When you are sure of your response, you can click the <b><font color='green'>CONTINUE</font></b> button. <br/>
             After each choice, look at the red dot at the center of the screen.  <br/>
+            <br><br/>
+            You will make a total of <font size=105%; font color = 'white';>72 </font>decision in this part. <br/>
             <br><br/>
             When you are ready, press the  <b>SPACE BAR</b> to continue.  </div>`,
     choices: ['spacebar'],
@@ -1822,39 +1826,39 @@ var trialcounter;
 function startExperiment() {
     jsPsych.init({
         timeline: [
-            paymentInfo,
-            paymentQuestion,
-            personalInfoQuestion,
-            surveyQuestion,
-            fullscreenEnter,
+            // paymentInfo,
+            // paymentQuestion,
+            // personalInfoQuestion,
+            // surveyQuestion,
+            // fullscreenEnter,
             experimentOverview,
-            choiceInstructions,
-            controlQuestionChoice1,
-            controlQuestionChoice1Response,
-            controlQuestionChoice2,
-            controlQuestionChoice2Response,
-            controlQuestionChoice3,
-            controlQuestionChoice3Response,
-            controlQuestionChoice4,
-            controlQuestionChoice4Response,
-            controlQuestionChoice5,
-            controlQuestionChoice5Response,
-            controlQuestionChoice6,
-            controlQuestionChoice6Response,
+            // choiceInstructions,
+            // controlQuestionChoice1,
+            // controlQuestionChoice1Response,
+            // controlQuestionChoice2,
+            // controlQuestionChoice2Response,
+            // controlQuestionChoice3,
+            // controlQuestionChoice3Response,
+            // controlQuestionChoice4,
+            // controlQuestionChoice4Response,
+            // controlQuestionChoice5,
+            // controlQuestionChoice5Response,
+            // controlQuestionChoice6,
+            // controlQuestionChoice6Response,
                 //controlQuestionsChoice,
             choiceOverview,
-            game_choice,
-            breaktime,
-            beliefInstructions,
-            controlQuestionBelief1,
-            controlQuestionBelief1Response,
-            controlQuestionBelief2,
-            controlQuestionBelief2Response,
-            controlQuestionBelief3,
-            controlQuestionBelief3Response,
+            // game_choice,
+            // breaktime,
+            // beliefInstructions,
+            // controlQuestionBelief1,
+            // controlQuestionBelief1Response,
+            // controlQuestionBelief2,
+            // controlQuestionBelief2Response,
+            // controlQuestionBelief3,
+            // controlQuestionBelief3Response,
                 //controlQuestionsBelief,
             beliefOverview,
-            game_belief,
+            // game_belief,
                 // riskInstructions,
                 // riskOverview,
                 // riskSurvey,
