@@ -111,11 +111,11 @@
       color: white;
     }
 
-    .tb .container-multi-choice-column .action-self #action-self-top{
+    .tb .container-multi-choice-column #multi-attribute-choices-stimulus-top .action-self #action-self-top{
       color: white;
     }
 
-    .tb .container-multi-choice-column .action-self #action-self-bottom{
+    .tb .container-multi-choice-column #multi-attribute-choices-stimulus-bottom .action-self #action-self-bottom{
       color: white;
     }
 
