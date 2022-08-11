@@ -277,6 +277,8 @@ function getRandomInt(min, max) {
 }
 
 
+
+
 /** choices */
 var choice_count = 0;
 var belief_count = 0;
@@ -367,7 +369,19 @@ function getRandDisplayChoice(n){
 }
 
 //var randDisplayOrderChoice = getRandDisplayChoice(n);
-var randDisplayOrderChoice = Array(n).fill([0]).flat();
+
+// randomize for each subject top and bottom actions
+// choose either display 0 or 3 for each subject throught the experiment
+var order = getRandomInt(0,3);
+if (order==0){
+    var randDisplayOrderChoice = Array(n).fill([0]).flat();
+} else if (order==1){
+    var randDisplayOrderChoice = Array(n).fill([1]).flat();
+} else if (order==2){
+    var randDisplayOrderChoice = Array(n).fill([2]).flat();
+} else if (order==3){
+    var randDisplayOrderChoice = Array(n).fill([3]).flat();
+}
 
 // randomize display of each action - choice phase
 function getRandDisplayBelief(randDisplayOrderChoice,randIndChoice,randIndBelief){
@@ -466,7 +480,7 @@ function getAnswersBeliefQuiz(belief_quiz_data){
         responses.push(belief_quiz_data[i].responses)
     }
     // var responses = belief_quiz_data[0].responses.slice(1,belief_quiz_data[0].responses.length-1).split(',');
-    var correctAnswers = ["$2","$6","FALSE"];
+    var correctAnswers = ["$8","TRUE","FALSE"];
     for(var i = 0; i < responses.length; i++){
         if(responses[i].includes(correctAnswers[i])){
             nCorrect = nCorrect + 1;
@@ -542,6 +556,7 @@ var feedback_question_choice_4 = [];
 var feedback_question_choice_5 = [];
 var feedback_question_choice_6 = [];
 
+var passedQuiz1 = 1;
 
 // question 1
 var controlQuestionChoice1 = {
@@ -942,8 +957,8 @@ var controlQuestionChoice6Response = {
 // quiz about the choice task
 
 
-// still to finish
-var passedQuiz1 = 1;
+
+//var passedQuiz1 = 1;
 var choice_quiz_data = [];
 var controlQuestionsChoice = {
     type: 'survey-multi-choice',
@@ -1048,28 +1063,29 @@ var beliefInstructions = {
 }
 
 // quiz about the belief task
-var question_belief_1_options = ["$8",
+var question_belief_1_options = ["$10",
+                        "$8",
                         "$6",
-                        "$4",
-                        "$2"];
-var question_belief_2_options = ["$8",
-                        "$6",
-                        "$4",
-                        "$2"];
+                        "$4"];
+var question_belief_2_options = ["TRUE",
+                        "FALSE"];
 var question_belief_3_options = ["TRUE",
                          "FALSE"];
 
 
 var questions_belief_data = [];
+
 var feedback_question_belief_1 = [];
 var feedback_question_belief_2 = [];
 var feedback_question_belief_3 = [];
                          
+var passedQuiz2 = 1;
+
 // question 1
 var controlQuestionBelief1 = {
     type: 'survey-multi-choice',
     questions: [
-        { prompt: "Question 1: Suppose you estimate that 60% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q1', options: question_belief_1_options, required: true },
+        { prompt: "Question 1: Suppose you estimate that 58% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q1', options: question_belief_1_options, required: true },
     ],
     preamble: `<div> 
     <br><br/>
@@ -1081,17 +1097,12 @@ var controlQuestionBelief1 = {
     <br><br/>
     <div>Suppose that 80% of the participants in the study selected action L in the table above.</div>
     <br><br/>
-    <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
-    <div>
-            <div>If your estimate is within 5% of the correct answer you earn $8</div>
-            <div>If your estimate is between 5% and 10% of the correct answer you earn $6</div>
-            <div>If your estimate is between 10% and 15% of the correct answer you earn $4</div>
-            <div>Otherwise you earn $2</div>
-    </div>
+    <div>Recall that you lose $0.50 for every 5% away you are from the correct answer.</div>
+    <div>If you are within 5% of the correct answer, you earn $10.</div>
     <br><br/>`,
     on_finish: function (data) {
         questions_belief_data.push(data);
-        if(data.responses.includes("$2")){
+        if(data.responses.includes("$8")){
             data.correct = true; // can add property correct by modify data object directly
         } else {
             data.correct = false;
@@ -1114,29 +1125,24 @@ var controlQuestionBelief1Response = {
         return `
         <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
         <br><br/> 
-        <div>Question 1: Suppose you estimate that 60% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?</div>
+        <div>Question 1: Suppose you estimate that 58% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?</div>
         <br><br/> 
         <br><br/>
         <img class = 'img_questions' src="img/control/control_img_2.png"></img>
         <br><br/>
-        <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
-        <div>
-                <div>If your estimate is within 5% of the correct answer you earn $8</div>
-                <div>If your estimate is between 5% and 10% of the correct answer you earn $6</div>
-                <div>If your estimate is between 10% and 15% of the correct answer you earn $4</div>
-                <div>Otherwise you earn $2</div>
-        </div>
+        <div>Recall that you lose $0.50 for every 5% away you are from the correct answer.</div>
+        <div>If you are within 5% of the correct answer, you earn $10.</div>
             <br><br/>
+            $10 <br>
             $8 <br>
             $6 <br>
             $4 <br>
-            $2 <br>
             <br><br/>
-            The correct answer is: <font color = 'green';> $2 </font>.
+            The correct answer is: <font color = 'green';> $8 </font>.
             <br><br/>
-            The error in your estimate is |80% - 60%| = 20%.
+            The error in your estimate is |80% - 58%| = 22%.
             <br><br/>
-            Therefore, you earn <font color = 'green';> $2 </font>. 
+            Therefore, you earn $10 - $2 = <font color = 'green';> $8 </font>. 
             <br><br/>
         When you are ready, press the  <b>SPACE BAR</b> to continue. 
         <br><br/> 
@@ -1152,29 +1158,15 @@ var controlQuestionBelief1Response = {
 var controlQuestionBelief2 = {
     type: 'survey-multi-choice',
     questions: [
-        { prompt: "Question 2: Suppose you estimate that 87% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?", name: 'Q2', options: question_belief_2_options, required: true },
+        { prompt: "Question 2: The closer your estimate is to the true answer the more you earn.", name: 'Q2', options: question_belief_2_options, required: true },
     ],
     preamble: `<div> 
     <br><br/>
     Please answer the following question. </div>
-    <div>Consider the following table.</div>
-    </div>
-    <br><br/>
-    <img class = 'img_questions' src="img/control/control_img_2.png"></img>
-    <br><br/>
-    <div>Suppose that 80% of the participants in the study selected action L in the table above.</div>
-    <br><br/>
-    <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
-    <div>
-            <div>If your estimate is within 5% of the correct answer you earn $8</div>
-            <div>If your estimate is between 5% and 10% of the correct answer you earn $6</div>
-            <div>If your estimate is between 10% and 15% of the correct answer you earn $4</div>
-            <div>Otherwise you earn $2</div>
-    </div>
     <br><br/>`,
     on_finish: function (data) {
         questions_belief_data.push(data);
-        if(data.responses.includes("$6")){
+        if(data.responses.includes("TRUE")){
             data.correct = true; // can add property correct by modify data object directly
         } else {
             data.correct = false;
@@ -1197,29 +1189,9 @@ var controlQuestionBelief2Response = {
         return `
         <div>Your answer was <font size=120%; font color = 'red';> incorrect </font>!</div>
         <br><br/> 
-        <div>Question 2: Suppose you estimate that 87% of the other participants selected column L in this round. What will you earn if this decision is selected for payment?</div>
+        <div>Question 2: The closer your estimate is to the true answer the more you earn.</div>
         <br><br/> 
-        <br><br/>
-        <img class = 'img_questions' src="img/control/control_img_2.png"></img>
-        <br><br/>
-        <div>Recall that the rule used to calculate your earnings for this part of the study is the following.</div>
-        <div>
-                <div>If your estimate is within 5% of the correct answer you earn $8</div>
-                <div>If your estimate is between 5% and 10% of the correct answer you earn $6</div>
-                <div>If your estimate is between 10% and 15% of the correct answer you earn $4</div>
-                <div>Otherwise you earn $2</div>
-        </div>
-            <br><br/>
-            $8 <br>
-            $6 <br>
-            $4 <br>
-            $2 <br>
-            <br><br/>
-            The correct answer is: <font color = 'green';> $6 </font>.
-            <br><br/>
-            The error in your estimate is |80% - 87%| = 7%.
-            <br><br/>
-            Therefore, you earn <font color = 'green';> $6 </font>. 
+            The correct answer is: <font color = 'green';> TRUE </font>.
             <br><br/>
         When you are ready, press the  <b>SPACE BAR</b> to continue. 
         <br><br/> 
@@ -1296,8 +1268,8 @@ var controlQuestionBelief3Response = {
 
 
 
-// still to finish
-var passedQuiz2 = 1;
+// old version - without feedback
+//var passedQuiz2 = 1;
 var belief_quiz_data = [];
 var controlQuestionsBelief = {
     type: 'survey-multi-choice',
