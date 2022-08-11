@@ -1,5 +1,11 @@
 /** to do list */
 
+// change types of fails for survey code at the end
+// add question in the beginning about prolific ID
+
+
+
+
 // // generate payoffs
 // var rVec = [0.55, 0.6, 0.7, 0.8, 0.9, 0.95];
 // var min_payoff = 5;
@@ -175,10 +181,16 @@ for (var i = 0; i < nImageInst; i++) {
 
 
 
+// only success and failed
+// function makeSurveyCode(status) {
+//     uploadSubjectStatus(status);
+//     var prefix = { 'success': 'cg', 'failed': 'sb' }[status]
+//     return `${prefix}${subject_id}`;
+// }
 
 function makeSurveyCode(status) {
     uploadSubjectStatus(status);
-    var prefix = { 'success': 'cg', 'failed': 'sb' }[status]
+    var prefix = { 'success': 'cg', 'failed_quiz_game': 'fg', 'failed_quiz_belief': 'fb' }[status]
     return `${prefix}${subject_id}`;
 }
 
@@ -943,9 +955,14 @@ var controlQuestionChoice6Response = {
         document.body.style.cursor = 'none';
         nCorrectChoice = getAnswersChoiceQuiz(questions_choice_data);
         if(nCorrectChoice<4){
-            survey_code = makeSurveyCode('failed');
+            survey_code = makeSurveyCode('failed_quiz_game');
             closeFullscreen();
-            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.  </br> Your survey code is: ${survey_code}${payFailQuiz1}. Thank you for signing up!`);
+            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.</br> 
+            <br><br/>
+            Your survey code is: ${survey_code}${payFailQuiz1}. <br/>
+            Make sure you copy this code in order to get paid!
+            <br><br/>
+            Thank you for signing up!`);
             passedQuiz1 = 0;
         }
     }
@@ -1260,9 +1277,15 @@ var controlQuestionBelief3Response = {
         document.body.style.cursor = 'none';
         nCorrectBelief = getAnswersBeliefQuiz(questions_belief_data);
         if(nCorrectBelief<2){
-            survey_code = makeSurveyCode('failed');
+            survey_code = makeSurveyCode('failed_quiz_belief');
             closeFullscreen();
-            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> You will receive  ${payFailQuiz2} for making it this far. Your survey code is: ${survey_code}${payFailQuiz2}. Thank you for signing up!`);
+            jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> 
+            You will receive  ${payFailQuiz2} for making it this far. </br>
+            <br><br/>
+            Your survey code is: ${survey_code}${payFailQuiz2}. <br/>
+            Make sure you copy this code in order to get paid!
+            <br><br/>
+            Thank you for signing up!`);
             passedQuiz2 = 0;
         }
     }
@@ -1819,37 +1842,49 @@ var on_finish_callback = function () {
 var trialcounter;
 
 
+// get prolific ID from subjects
+var jsPsych = initJsPsych();
 
+// capture info from Prolific
+var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+var study_id = jsPsych.data.getURLVariable('STUDY_ID');
+var session_id = jsPsych.data.getURLVariable('SESSION_ID');
+
+jsPsych.data.addProperties({
+    subject_id: subject_id,
+    study_id: study_id,
+    session_id: session_id
+});
 
 
 
 function startExperiment() {
     jsPsych.init({
         timeline: [
-            paymentInfo,
-            paymentQuestion,
-            personalInfoQuestion,
-            surveyQuestion,
-            fullscreenEnter,
-            experimentOverview,
-            choiceInstructions,
-            controlQuestionChoice1,
-            controlQuestionChoice1Response,
-            controlQuestionChoice2,
-            controlQuestionChoice2Response,
-            controlQuestionChoice3,
-            controlQuestionChoice3Response,
-            controlQuestionChoice4,
-            controlQuestionChoice4Response,
-            controlQuestionChoice5,
-            controlQuestionChoice5Response,
-            controlQuestionChoice6,
-            controlQuestionChoice6Response,
+            // paymentInfo,
+            // paymentQuestion,
+            // personalInfoQuestion,
+            // surveyQuestion,
+            // fullscreenEnter,
+            // experimentOverview,
+            // choiceInstructions,
+            // controlQuestionChoice1,
+            // controlQuestionChoice1Response,
+            // controlQuestionChoice2,
+            // controlQuestionChoice2Response,
+            // controlQuestionChoice3,
+            // controlQuestionChoice3Response,
+            // controlQuestionChoice4,
+            // controlQuestionChoice4Response,
+            // controlQuestionChoice5,
+            // controlQuestionChoice5Response,
+            // controlQuestionChoice6,
+            // controlQuestionChoice6Response,
                 //controlQuestionsChoice,
-            choiceOverview,
-            game_choice,
-            breaktime,
-            beliefInstructions,
+            // choiceOverview,
+            // game_choice,
+            // breaktime,
+            // beliefInstructions,
             controlQuestionBelief1,
             controlQuestionBelief1Response,
             controlQuestionBelief2,
@@ -1857,8 +1892,8 @@ function startExperiment() {
             controlQuestionBelief3,
             controlQuestionBelief3Response,
                 //controlQuestionsBelief,
-            beliefOverview,
-            game_belief,
+            // beliefOverview,
+            // game_belief,
                 // riskInstructions,
                 // riskOverview,
                 // riskSurvey,
@@ -1873,12 +1908,16 @@ function startExperiment() {
                 closeFullscreen()
                 document.body.style.cursor = 'pointer'
                 jsPsych.endExperiment(`<div>
-                Thank you for your participation! You can close the browser to end the experiment now. </br>
+                Thank you for your participation!</br>
                 We will send you the payment for Part 1 or Part 2 within the next 2 weeks. </br>
+                <br></br>
                 Your survey code is: ${makeSurveyCode('success')}. </br>
+                Make sure you copy this code in order to get paid! </br>
+                <br></br>
+                You can close the browser to end the experiment now. </br>
                 </div>`);
             }
-            if (trialcounter == 30) { 
+            if (trialcounter == 10) { 
                 on_finish_callback();
                 jsPsych.data.reset();
             }
