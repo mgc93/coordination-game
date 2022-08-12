@@ -1777,9 +1777,8 @@ var ambiguitySurvey = {
 // }
 
 var fullscreenExit = {
-    type: 'fullscreen',
-    //fullscreen_mode: false,
-    on_start: function() {
+    type: 'call-function',
+    func: () => { 
       should_be_in_fullscreen = false; // once this trial starts, the participant is no longer required to stay in fullscreen
     }
 };
@@ -1875,18 +1874,18 @@ function startExperiment() {
             fullscreenEnter,
             experimentOverview,
             choiceInstructions,
-            controlQuestionChoice1,
-            controlQuestionChoice1Response,
-            controlQuestionChoice2,
-            controlQuestionChoice2Response,
-            controlQuestionChoice3,
-            controlQuestionChoice3Response,
-            controlQuestionChoice4,
-            controlQuestionChoice4Response,
-            controlQuestionChoice5,
-            controlQuestionChoice5Response,
-            controlQuestionChoice6,
-            controlQuestionChoice6Response,
+            // controlQuestionChoice1,
+            // controlQuestionChoice1Response,
+            // controlQuestionChoice2,
+            // controlQuestionChoice2Response,
+            // controlQuestionChoice3,
+            // controlQuestionChoice3Response,
+            // controlQuestionChoice4,
+            // controlQuestionChoice4Response,
+            // controlQuestionChoice5,
+            // controlQuestionChoice5Response,
+            // controlQuestionChoice6,
+            // controlQuestionChoice6Response,
                 //controlQuestionsChoice,
             // choiceOverview,
             // game_choice,
@@ -1943,7 +1942,7 @@ function startExperiment() {
               jsPsych.getDisplayElement().style.visibility = 'hidden';
               // add a div that contains a message and button to re-enter fullscreen
               jsPsych.getDisplayElement().insertAdjacentHTML('beforebegin',
-              '<div id="message-div" style="margin: auto; width: 100%; text-align: center;">'+
+              '<div id="message-div" style="margin: auto; width: 100%; text-align: center; position: absolute; top: 40%;">'+
               '<p>Please remain in fullscreen mode during the task.</p>'+
               '<p>When you click the button below, you will enter fullscreen mode.</p>'+
               '<button id="jspsych-fullscreen-btn" class="jspsych-btn">Continue</button></div>');
