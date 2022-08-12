@@ -1778,7 +1778,7 @@ var ambiguitySurvey = {
 
 var fullscreenExit = {
     type: 'fullscreen',
-    fullscreen_mode: false,
+    //fullscreen_mode: false,
     on_start: function() {
       should_be_in_fullscreen = false; // once this trial starts, the participant is no longer required to stay in fullscreen
     }
@@ -1823,9 +1823,9 @@ function closeFullscreen() {
 // get prolific ID from subjects
 
 // capture info from Prolific
-var prolific_subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
-var prolific_study_id = jsPsych.data.getURLVariable('STUDY_ID');
-var prolific_session_id = jsPsych.data.getURLVariable('SESSION_ID');
+var prolific_subject_id = 0; //jsPsych.data.getURLVariable('PROLIFIC_PID');
+var prolific_study_id = 0; //jsPsych.data.getURLVariable('STUDY_ID');
+var prolific_session_id = 0; //jsPsych.data.getURLVariable('SESSION_ID');
 
 var on_finish_callback = function () {
     // jsPsych.data.displayData();
@@ -1913,7 +1913,7 @@ function startExperiment() {
         on_trial_finish: function () {
             trialcounter = jsPsych.data.get().count();
             if (successExp) {
-                closeFullscreen()
+                closeFullscreen();
                 document.body.style.cursor = 'pointer'
                 jsPsych.endExperiment(`<div>
                 Thank you for your participation!</br>
@@ -1925,7 +1925,7 @@ function startExperiment() {
                 You can close the browser to end the experiment now. </br>
                 </div>`);
             }
-            if (trialcounter == 10) { 
+            if (trialcounter == 40) { 
                 on_finish_callback();
                 jsPsych.data.reset();
             }
