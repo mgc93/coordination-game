@@ -254,7 +254,7 @@ var surveyQuestion = {
 };
 
 
-
+var should_be_in_fullscreen = false;
 
 /** full screen */
 var fullscreenEnter = {
@@ -267,6 +267,9 @@ var fullscreenEnter = {
     The study will switch to full screen mode when you press the button below.  <br/>
     When you are ready to begin, press the button.</div>`,
     fullscreen_mode: true,
+    on_start: function() {
+        should_be_in_fullscreen = true; // once this trial starts, the participant should be in fullscreen
+    },
     on_finish: function () {
         document.body.style.cursor = 'none'
     }
@@ -1773,6 +1776,14 @@ var ambiguitySurvey = {
 //     return html
 // }
 
+var fullscreenExit = {
+    type: 'fullscreen',
+    fullscreen_mode: false,
+    on_start: function() {
+      should_be_in_fullscreen = false; // once this trial starts, the participant is no longer required to stay in fullscreen
+    }
+};
+
 var successExp = false;
 var success_guard = {
     type: 'call-function',
@@ -1896,6 +1907,7 @@ function startExperiment() {
                 // ambiguityInstructions,
                 // ambiguityOverview,
                 // ambiguitySurvey,
+            fullscreenExit,
             success_guard
         ],
         on_trial_finish: function () {
@@ -1918,10 +1930,48 @@ function startExperiment() {
                 jsPsych.data.reset();
             }
         },
+        // on_interaction_data_update: function(data){
+        //     if(data.event == 'fullscreenexit'){
+        //         on_finish_callback();
+        //         jsPsych.endExperiment('You have exited out of fullscreen mode.</br>  Unfortunately, we cannot continue with the study.</br> <br></br> Your completion code is <span style="color:cyan;">COUNY3WJ</span>.'); 
+        //     }
+        // },
         on_interaction_data_update: function(data){
-            if(data.event == 'fullscreenexit'){
-              save_data_callback();
-              jsPsych.endExperiment('You have exited out of fullscreen mode.</br>  Unfortunately, we cannot continue with the study.</br> <br></br> Your completion code is <span style="color:cyan;">COUNY3WJ</span>.'); 
+            if(data.event == 'fullscreenexit' && should_be_in_fullscreen){
+              console.log('exited fullscreen');
+              // hide the contents of the current trial
+              jsPsych.getDisplayElement().style.visibility = 'hidden';
+              // add a div that contains a message and button to re-enter fullscreen
+              jsPsych.getDisplayElement().insertAdjacentHTML('beforebegin',
+              '<div id="message-div" style="margin: auto; width: 100%; text-align: center;">'+
+              '<p>Please remain in fullscreen mode during the task.</p>'+
+              '<p>When you click the button below, you will enter fullscreen mode.</p>'+
+              '<button id="jspsych-fullscreen-btn" class="jspsych-btn">Continue</button></div>');
+              // call the request fullscreen function when the button is clicked
+              document.querySelector('#jspsych-fullscreen-btn').addEventListener('click', function() {
+                var element = document.documentElement;
+                if (element.requestFullscreen) {
+                  element.requestFullscreen();
+                } else if (element.mozRequestFullScreen) {
+                  element.mozRequestFullScreen();
+                } else if (element.webkitRequestFullscreen) {
+                  element.webkitRequestFullscreen();
+                } else if (element.msRequestFullscreen) {
+                  element.msRequestFullscreen();
+                }
+              });
+            }
+            if(data.event == 'fullscreenenter'){
+              console.log('entered fullscreen');
+              // when entering fullscreen, check to see if the participant is re-entering fullscreen, 
+              // i.e. the 'please enter fullscreen' message is on the page
+              var msg_div = document.querySelector('#message-div');
+              if (msg_div !== null) {
+                // remove the message
+                msg_div.remove(); 
+                // show the contents of the current trial again
+                jsPsych.getDisplayElement().style.visibility = 'visible';
+              }
             }
         },
         preload_images: [instructions_images, control_images, instruct_img],
