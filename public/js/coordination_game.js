@@ -1822,9 +1822,9 @@ function closeFullscreen() {
 // get prolific ID from subjects
 
 // capture info from Prolific
-var prolific_subject_id = 0; //jsPsych.data.getURLVariable('PROLIFIC_PID');
-var prolific_study_id = 0; //jsPsych.data.getURLVariable('STUDY_ID');
-var prolific_session_id = 0; //jsPsych.data.getURLVariable('SESSION_ID');
+var prolific_subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+var prolific_study_id = jsPsych.data.getURLVariable('STUDY_ID');
+var prolific_session_id = jsPsych.data.getURLVariable('SESSION_ID');
 
 var on_finish_callback = function () {
     // jsPsych.data.displayData();
