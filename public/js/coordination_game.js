@@ -964,7 +964,7 @@ var controlQuestionChoice6Response = {
             closeFullscreen();
             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.</br> 
             <br><br/>
-            Your survey code is: ${survey_code}. <br/>
+            Your completion code is <span style="color:cyan;">CIEDTT4P</span>.<br/>
             Make sure you copy this code in order to get paid!
             <br><br/>
             Thank you for signing up!`);
@@ -1287,7 +1287,7 @@ var controlQuestionBelief3Response = {
             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> 
             You will receive  ${payFailQuiz2} for making it this far. </br>
             <br><br/>
-            Your survey code is: ${survey_code}. <br/>
+            Your completion code is <span style="color:cyan;">C1EQA4GP</span>.<br/>
             Make sure you copy this code in order to get paid!
             <br><br/>
             Thank you for signing up!`);
@@ -1913,12 +1913,14 @@ function startExperiment() {
             trialcounter = jsPsych.data.get().count();
             if (successExp) {
                 closeFullscreen();
+                survey_code = makeSurveyCode('success');
+                //Your survey code is: ${makeSurveyCode('success')}. </br>
                 document.body.style.cursor = 'pointer'
                 jsPsych.endExperiment(`<div>
                 Thank you for your participation!</br>
-                We will send you the payment for Part 1 or Part 2 within the next 2 weeks. </br>
+                We will send you the payment for Part 1 or Part 2 soon. </br>
                 <br></br>
-                Your survey code is: ${makeSurveyCode('success')}. </br>
+                Your completion code is <span style="color:cyan;">CQB85KI2</span>.<br/>
                 Make sure you copy this code in order to get paid! </br>
                 <br></br>
                 You can close the browser to end the experiment now. </br>
@@ -1932,7 +1934,7 @@ function startExperiment() {
         // on_interaction_data_update: function(data){
         //     if(data.event == 'fullscreenexit'){
         //         on_finish_callback();
-        //         jsPsych.endExperiment('You have exited out of fullscreen mode.</br>  Unfortunately, we cannot continue with the study.</br> <br></br> Your completion code is <span style="color:cyan;">COUNY3WJ</span>.'); 
+        //         jsPsych.endExperiment('You have exited out of fullscreen mode.</br>  Unfortunately, we cannot continue with the study.</br> <br></br> Your completion code is <span style="color:cyan;">CIEDTT4P</span>.'); 
         //     }
         // },
         on_interaction_data_update: function(data){
