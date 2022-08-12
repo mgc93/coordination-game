@@ -1,9 +1,11 @@
 /** to do list */
 
-// change types of fails for survey code at the end
-// add question in the beginning about prolific ID
-
-
+// (done) change types of fails for survey code at the end
+// (done) add question in the beginning about prolific ID - automatic
+// take out payment questions
+// warn them about exiting full screen mode - check code works
+// add completion codes from prolific
+// check if prolific id is saved
 
 
 // // generate payoffs
@@ -144,7 +146,7 @@ downloadCSV = function (csv, filename) {
     downloadLink.click();
 };
 
-var payFailQuiz1 = '0c';
+var payFailQuiz1 = '50c';
 var payFailQuiz2 = '500c';
 
 /**************/
@@ -1807,7 +1809,12 @@ function closeFullscreen() {
     }
 }
 
+// get prolific ID from subjects
 
+// capture info from Prolific
+var prolific_subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+var prolific_study_id = jsPsych.data.getURLVariable('STUDY_ID');
+var prolific_session_id = jsPsych.data.getURLVariable('SESSION_ID');
 
 var on_finish_callback = function () {
     // jsPsych.data.displayData();
@@ -1817,6 +1824,9 @@ var on_finish_callback = function () {
         subject: subject_id,
         pass_quiz_1: passedQuiz1,
         pass_quiz_2: passedQuiz2,
+        prolific_subject_id: prolific_subject_id,
+        prolific_study_id: prolific_study_id,
+        prolific_session_id: prolific_session_id,
         interaction: jsPsych.data.getInteractionData().json(),
         windowWidth: screen.width,
         windowHight: screen.height
@@ -1842,20 +1852,6 @@ var on_finish_callback = function () {
 var trialcounter;
 
 
-// get prolific ID from subjects
-var jsPsych = initJsPsych();
-
-// capture info from Prolific
-var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
-var study_id = jsPsych.data.getURLVariable('STUDY_ID');
-var session_id = jsPsych.data.getURLVariable('SESSION_ID');
-
-jsPsych.data.addProperties({
-    subject_id: subject_id,
-    study_id: study_id,
-    session_id: session_id
-});
-
 
 
 function startExperiment() {
@@ -1865,9 +1861,9 @@ function startExperiment() {
             // paymentQuestion,
             // personalInfoQuestion,
             // surveyQuestion,
-            // fullscreenEnter,
-            // experimentOverview,
-            // choiceInstructions,
+            fullscreenEnter,
+            experimentOverview,
+            choiceInstructions,
             controlQuestionChoice1,
             controlQuestionChoice1Response,
             controlQuestionChoice2,
@@ -1920,6 +1916,12 @@ function startExperiment() {
             if (trialcounter == 10) { 
                 on_finish_callback();
                 jsPsych.data.reset();
+            }
+        },
+        on_interaction_data_update: function(data){
+            if(data.event == 'fullscreenexit'){
+              save_data_callback();
+              jsPsych.endExperiment('You have exited out of fullscreen mode.</br>  Unfortunately, we cannot continue with the study.</br> <br></br> Your completion code is <span style="color:cyan;">COUNY3WJ</span>.'); 
             }
         },
         preload_images: [instructions_images, control_images, instruct_img],
