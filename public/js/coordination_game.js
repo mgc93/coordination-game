@@ -960,6 +960,7 @@ var controlQuestionChoice6Response = {
         document.body.style.cursor = 'none';
         nCorrectChoice = getAnswersChoiceQuiz(questions_choice_data);
         if(nCorrectChoice<4){
+            should_be_in_fullscreen = false;
             survey_code = makeSurveyCode('failed_quiz_game');
             closeFullscreen();
             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.</br> 
@@ -1282,6 +1283,7 @@ var controlQuestionBelief3Response = {
         document.body.style.cursor = 'none';
         nCorrectBelief = getAnswersBeliefQuiz(questions_belief_data);
         if(nCorrectBelief<2){
+            should_be_in_fullscreen = false;
             survey_code = makeSurveyCode('failed_quiz_belief');
             closeFullscreen();
             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> 
