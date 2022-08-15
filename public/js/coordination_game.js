@@ -4,7 +4,7 @@
 // (done) add question in the beginning about prolific ID - automatic
 // (done) take out payment questions
 // (done) warn them about exiting full screen mode - check code works
-// add completion codes from prolific
+// (done) add completion codes from prolific
 // check if prolific id is saved
 
 
