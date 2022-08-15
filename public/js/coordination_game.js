@@ -961,7 +961,7 @@ var controlQuestionChoice6Response = {
         nCorrectChoice = getAnswersChoiceQuiz(questions_choice_data);
         if(nCorrectChoice<4){
             should_be_in_fullscreen = false;
-            survey_code = makeSurveyCode('failed_quiz_game');
+            var survey_code = makeSurveyCode('failed_quiz_game');
             closeFullscreen();
             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.</br> 
             <br><br/>
@@ -1284,7 +1284,7 @@ var controlQuestionBelief3Response = {
         nCorrectBelief = getAnswersBeliefQuiz(questions_belief_data);
         if(nCorrectBelief<2){
             should_be_in_fullscreen = false;
-            survey_code = makeSurveyCode('failed_quiz_belief');
+            var survey_code = makeSurveyCode('failed_quiz_belief');
             closeFullscreen();
             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectBelief} questions correctly.  </br> 
             You will receive  ${payFailQuiz2} for making it this far. </br>
@@ -1915,7 +1915,7 @@ function startExperiment() {
             trialcounter = jsPsych.data.get().count();
             if (successExp) {
                 closeFullscreen();
-                survey_code = makeSurveyCode('success');
+                var survey_code = makeSurveyCode('success');
                 //Your survey code is: ${makeSurveyCode('success')}. </br>
                 document.body.style.cursor = 'pointer'
                 jsPsych.endExperiment(`<div>
