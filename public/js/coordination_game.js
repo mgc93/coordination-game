@@ -969,8 +969,8 @@ var controlQuestionChoice6Response = {
             closeFullscreen();
             jsPsych.endExperiment(`We are sorry! Unfortunately, you have answered only ${nCorrectChoice} questions correctly.</br> 
             <br><br/>
-            Your completion code is <span style="color:cyan;">CIEDTT4P</span>.<br/>
-            Make sure you copy this code in order to get paid!
+            Please RETURN YOUR SUBMISSION by closing the survey and clicking <span style="color:cyan;">'Stop Without Completing'</span> on Prolific.<br/>
+            You will get $0.75 for making it this far.
             <br><br/>
             Thank you for signing up!`);
             passedQuiz1 = 0;
