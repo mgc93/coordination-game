@@ -577,88 +577,7 @@ var feedback_question_choice_6 = [];
 var passedQuiz1 = 1;
 
 
-// change survey to be able to go back to instructions
-var controlQuestionChoiceInstructions1 = {
-    type: 'survey-multi-choice',
-    questions: [
-        { prompt: "Question 1: If the COLUMN CHOOSER selects the column L and you select the row T, how many points will you earn?", name: 'Q1', options: question_choice_1_options, required: true },
-    ],
-    preamble: `<div> 
-        <br><br/>
-        Please answer the following question.</div>
-        <br><br/>
-        <div>Consider the following table.</div>
-    </div>
-    <br><br/>
-    <img class = 'img_questions' src="img/control/control_img_1.png"></img>
-    <br><br/>
-    Press K if you want to read the instructions again.<br/>
-    <br><br/>`,
-    on_finish: function (data) {
-        questions_choice_data.push(data);
-        if(data.responses.includes("200")){
-            data.correct = true; // can add property correct by modify data object directly
-          } else {
-            data.correct = false;
-        }
-        // and check which key was pressed
-        if (jsPsych.pluginAPI.compareKeys(data.response, 'k')) {
-            // show the instructions
-            return [choiceInstructions];
-        } else {
-            return [controlQuestionChoiceInstructions1];
-        }
-    },
-    // conditional_function: function (){
-    //     // and check which key was pressed
-    //     if (jsPsych.pluginAPI.compareKeys(data.response, 'k')) {
-    //         // show the instructions
-    //         return [choiceInstructions];
-    //     } else {
-    //         return [controlQuestionChoiceInstructions1];
-    //     }
-    // }
-};
-
-
-// var if_node1 = {
-//     timeline: [fixation],
-//     conditional_function: function(){
-//         if(Math.round(charity_choice_count%5) == 0){
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     }
-//   }
-// var pre_if_trial = {
-//     type: jsPsychHtmlKeyboardResponse,
-//     stimulus: 'The next trial is in a conditional statement. Press S to skip it, or V to view it.'
-// }
-
-// var if_trial = {
-//     type: jsPsychHtmlKeyboardResponse,
-//     stimulus: 'You chose to view the trial. Press any key to continue.'
-// }
-
-// var if_node = {
-//     timeline: [if_trial],
-//     conditional_function: function(){
-//         // get the data from the previous trial,
-//         // and check which key was pressed
-//         var data = jsPsych.data.get().last(1).values()[0];
-//         if(jsPsych.pluginAPI.compareKeys(data.response, 's')){
-//             return false;
-//         } else {
-//             return true;
-//         }
-//     }
-// }
-
-// var after_if_trial = {
-//     type: jsPsychHtmlKeyboardResponse,
-//     stimulus: 'This is the trial after the conditional.'
-// }
+// to do: change survey to have the option to go back to instructions
 
 // question 1
 var controlQuestionChoice1 = {
@@ -1961,20 +1880,18 @@ function startExperiment() {
             fullscreenEnter,
             experimentOverview,
             choiceInstructions,
-            controlQuestionChoiceInstructions1,
+            controlQuestionChoice1,
             controlQuestionChoice1Response,
-            // controlQuestionChoice1,
-            // controlQuestionChoice1Response,
-            // controlQuestionChoice2,
-            // controlQuestionChoice2Response,
-            // controlQuestionChoice3,
-            // controlQuestionChoice3Response,
-            // controlQuestionChoice4,
-            // controlQuestionChoice4Response,
-            // controlQuestionChoice5,
-            // controlQuestionChoice5Response,
-            // controlQuestionChoice6,
-            // controlQuestionChoice6Response,
+            controlQuestionChoice2,
+            controlQuestionChoice2Response,
+            controlQuestionChoice3,
+            controlQuestionChoice3Response,
+            controlQuestionChoice4,
+            controlQuestionChoice4Response,
+            controlQuestionChoice5,
+            controlQuestionChoice5Response,
+            controlQuestionChoice6,
+            controlQuestionChoice6Response,
                 //controlQuestionsChoice,
             choiceOverview,
             game_choice,
