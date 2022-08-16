@@ -601,8 +601,6 @@ var controlQuestionChoiceInstructions1 = {
           } else {
             data.correct = false;
         }
-    },
-    conditional_function: function(data){
         // and check which key was pressed
         if (jsPsych.pluginAPI.compareKeys(data.response, 'k')) {
             // show the instructions
@@ -610,7 +608,16 @@ var controlQuestionChoiceInstructions1 = {
         } else {
             return [controlQuestionChoiceInstructions1];
         }
-    }
+    },
+    // conditional_function: function (){
+    //     // and check which key was pressed
+    //     if (jsPsych.pluginAPI.compareKeys(data.response, 'k')) {
+    //         // show the instructions
+    //         return [choiceInstructions];
+    //     } else {
+    //         return [controlQuestionChoiceInstructions1];
+    //     }
+    // }
 };
 
 
